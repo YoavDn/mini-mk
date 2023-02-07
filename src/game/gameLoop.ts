@@ -26,8 +26,6 @@ export default class GameLoop {
   }
 
   private tick() {
-    console.log('Hello from tick game loop');
-
     this.ctx.clearRect(0, 0, this.w, this.h);
 
     //draw the players
