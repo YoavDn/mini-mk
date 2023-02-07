@@ -55,14 +55,14 @@ export default class Fighter1 extends Fighter {
         if (e.code === player1[action] && e.repeat === false) {
           switch (action) {
             case 'left':
-              this.keys.ArrowLeft.pressed = true;
               if (this.inAir()) break;
+              this.keys.ArrowLeft.pressed = true;
               this.lastKey = player1[action];
 
               break;
             case 'right':
-              this.keys.ArrowRight.pressed = true;
               if (this.inAir()) break;
+              this.keys.ArrowRight.pressed = true;
               this.lastKey = player1[action];
 
               break;
