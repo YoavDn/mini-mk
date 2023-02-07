@@ -1,6 +1,6 @@
 import Game from '../game';
 import type { TCoordinates, THitBox } from '../types';
-
+const GRAVITY = 0.7;
 export interface ICharacter {
   game: Game;
   name: string;
@@ -33,6 +33,7 @@ export default class Fighter {
   }
 
   duck(isDownPressed: boolean) {
+    if (this.velocity.y !== 0) return;
     if (isDownPressed) {
       this.hitbox.height = 90;
     } else {

@@ -1,9 +1,7 @@
 import Fighter from '.';
 import Game from '../game';
 import controls from '../controls';
-
-const GRAVITY = 0.7;
-
+import { GRAVITY } from '../utils';
 interface IKeys {
   ArrowLeft: {
     pressed: boolean;
@@ -73,6 +71,8 @@ export default class Fighter1 extends Fighter {
               break;
 
             case 'up':
+              if (this.pos.y < this.ctx.canvas.height - this.hitbox.height)
+                break;
               this.keys.ArrowUp.pressed = true;
               this.velocity.y = -20;
               break;
@@ -120,7 +120,7 @@ export default class Fighter1 extends Fighter {
     ) {
       this.velocity.x = 5;
     }
-    // if (!this.keys.ArrowUp.pressed) this.duck(this.keys.ArrowDown.pressed);
+    if (!this.keys.ArrowUp.pressed) this.duck(this.keys.ArrowDown.pressed);
 
     this.pos.x += this.velocity.x;
     this.pos.y += this.velocity.y;

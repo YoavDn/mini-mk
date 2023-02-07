@@ -1,6 +1,7 @@
 import Fighter from '.';
 import controls from '../controls';
 import Game from '../game';
+import { GRAVITY } from '../utils';
 
 interface IKeys {
   a: {
@@ -10,6 +11,9 @@ interface IKeys {
     pressed: boolean;
   };
   s: {
+    pressed: boolean;
+  };
+  w: {
     pressed: boolean;
   };
 }
@@ -26,6 +30,9 @@ export default class Fighter1 extends Fighter {
         pressed: false,
       },
       s: {
+        pressed: false,
+      },
+      w: {
         pressed: false,
       },
     };
@@ -64,6 +71,12 @@ export default class Fighter1 extends Fighter {
               this.lastKey = player2[action];
 
               break;
+            case 'up':
+              if (this.pos.y < this.ctx.canvas.height - this.hitbox.height)
+                break;
+              this.keys.w.pressed = true;
+              this.velocity.y = -20;
+              break;
           }
         }
       });
@@ -80,6 +93,10 @@ export default class Fighter1 extends Fighter {
               break;
             case 'down':
               this.keys.s.pressed = false;
+
+              break;
+            case 'up':
+              this.keys.w.pressed = false;
 
               break;
           }
@@ -103,8 +120,14 @@ export default class Fighter1 extends Fighter {
     ) {
       this.velocity.x = 5;
     }
-    this.duck(this.keys.s.pressed);
+
+    if (!this.keys.w.pressed) this.duck(this.keys.s.pressed);
 
     this.pos.x += this.velocity.x;
+    this.pos.y += this.velocity.y;
+
+    if (this.pos.y > this.ctx.canvas.height - this.hitbox.height) {
+      this.velocity.y = 0;
+    } else this.velocity.y += GRAVITY;
   }
 }
