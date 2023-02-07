@@ -9,6 +9,9 @@ interface IKeys {
   d: {
     pressed: boolean;
   };
+  s: {
+    pressed: boolean;
+  };
 }
 
 export default class Fighter1 extends Fighter {
@@ -20,6 +23,9 @@ export default class Fighter1 extends Fighter {
         pressed: false,
       },
       d: {
+        pressed: false,
+      },
+      s: {
         pressed: false,
       },
     };
@@ -53,6 +59,11 @@ export default class Fighter1 extends Fighter {
               this.lastKey = player2[action];
 
               break;
+            case 'down':
+              this.keys.s.pressed = true;
+              this.lastKey = player2[action];
+
+              break;
           }
         }
       });
@@ -67,6 +78,10 @@ export default class Fighter1 extends Fighter {
               this.keys.d.pressed = false;
 
               break;
+            case 'down':
+              this.keys.s.pressed = false;
+
+              break;
           }
         }
       });
@@ -75,11 +90,26 @@ export default class Fighter1 extends Fighter {
 
   update(): void {
     this.velocity.x = 0;
-    if (this.keys.a.pressed && this.lastKey === 'KeyA') {
+    if (
+      this.keys.a.pressed &&
+      this.lastKey === 'KeyA' &&
+      !this.keys.s.pressed
+    ) {
       this.velocity.x = -5;
-    } else if (this.keys.d.pressed && this.lastKey === 'KeyD') {
+    } else if (
+      this.keys.d.pressed &&
+      this.lastKey === 'KeyD' &&
+      !this.keys.s.pressed
+    ) {
       this.velocity.x = 5;
     }
+    if (this.keys.s.pressed) {
+      this.hitbox.height = 90;
+    } else {
+      this.hitbox.height = 180;
+    }
+
     this.pos.x += this.velocity.x;
+    this.pos.y = this.ctx.canvas.height - this.hitbox.height;
   }
 }

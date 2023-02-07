@@ -9,6 +9,9 @@ interface IKeys {
   ArrowRight: {
     pressed: boolean;
   };
+  ArrowDown: {
+    pressed: boolean;
+  };
 }
 
 export default class Fighter1 extends Fighter {
@@ -21,6 +24,9 @@ export default class Fighter1 extends Fighter {
         pressed: false,
       },
       ArrowRight: {
+        pressed: false,
+      },
+      ArrowDown: {
         pressed: false,
       },
     };
@@ -52,6 +58,11 @@ export default class Fighter1 extends Fighter {
               this.lastKey = player1[action];
 
               break;
+
+            case 'down':
+              this.keys.ArrowDown.pressed = true;
+              this.lastKey = player1[action];
+              break;
           }
         }
       });
@@ -67,6 +78,10 @@ export default class Fighter1 extends Fighter {
               this.keys.ArrowRight.pressed = false;
 
               break;
+            case 'down':
+              this.keys.ArrowDown.pressed = false;
+
+              break;
           }
         }
       });
@@ -75,11 +90,28 @@ export default class Fighter1 extends Fighter {
 
   update(): void {
     this.velocity.x = 0;
-    if (this.keys.ArrowLeft.pressed && this.lastKey === 'ArrowLeft') {
+    if (
+      this.keys.ArrowLeft.pressed &&
+      this.lastKey === 'ArrowLeft' &&
+      !this.keys.ArrowDown.pressed
+    ) {
       this.velocity.x = -5;
-    } else if (this.keys.ArrowRight.pressed && this.lastKey === 'ArrowRight') {
+    } else if (
+      this.keys.ArrowRight.pressed &&
+      this.lastKey === 'ArrowRight' &&
+      !this.keys.ArrowDown.pressed
+    ) {
       this.velocity.x = 5;
     }
+
+    //ducking
+    if (this.keys.ArrowDown.pressed) {
+      this.hitbox.height = 90;
+    } else {
+      this.hitbox.height = 180;
+    }
+
     this.pos.x += this.velocity.x;
+    this.pos.y = this.ctx.canvas.height - this.hitbox.height;
   }
 }
