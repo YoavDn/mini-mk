@@ -103,13 +103,8 @@ export default class Fighter1 extends Fighter {
     ) {
       this.velocity.x = 5;
     }
-    if (this.keys.s.pressed) {
-      this.hitbox.height = 90;
-    } else {
-      this.hitbox.height = 180;
-    }
+    this.duck(this.keys.s.pressed);
 
     this.pos.x += this.velocity.x;
-    this.pos.y = this.ctx.canvas.height - this.hitbox.height;
   }
 }

@@ -2,6 +2,8 @@ import Fighter from '.';
 import Game from '../game';
 import controls from '../controls';
 
+const GRAVITY = 0.7;
+
 interface IKeys {
   ArrowLeft: {
     pressed: boolean;
@@ -10,6 +12,9 @@ interface IKeys {
     pressed: boolean;
   };
   ArrowDown: {
+    pressed: boolean;
+  };
+  ArrowUp: {
     pressed: boolean;
   };
 }
@@ -29,6 +34,9 @@ export default class Fighter1 extends Fighter {
       ArrowDown: {
         pressed: false,
       },
+      ArrowUp: {
+        pressed: false,
+      },
     };
     this.startPos();
     this.regeisterControls();
@@ -39,7 +47,7 @@ export default class Fighter1 extends Fighter {
     const { width: charW, height: charH } = this.hitbox;
     const xPos = this.ctx.canvas.width / 2 - charW * 3;
     const yPos = btm - charH;
-    this.pos = { x: xPos, y: yPos };
+    this.pos = { x: xPos, y: 300 };
   }
 
   regeisterControls() {
@@ -63,6 +71,11 @@ export default class Fighter1 extends Fighter {
               this.keys.ArrowDown.pressed = true;
               this.lastKey = player1[action];
               break;
+
+            case 'up':
+              this.keys.ArrowUp.pressed = true;
+              this.velocity.y = -20;
+              break;
           }
         }
       });
@@ -80,6 +93,10 @@ export default class Fighter1 extends Fighter {
               break;
             case 'down':
               this.keys.ArrowDown.pressed = false;
+
+              break;
+            case 'up':
+              this.keys.ArrowUp.pressed = false;
 
               break;
           }
@@ -103,15 +120,14 @@ export default class Fighter1 extends Fighter {
     ) {
       this.velocity.x = 5;
     }
-
-    //ducking
-    if (this.keys.ArrowDown.pressed) {
-      this.hitbox.height = 90;
-    } else {
-      this.hitbox.height = 180;
-    }
+    // if (!this.keys.ArrowUp.pressed) this.duck(this.keys.ArrowDown.pressed);
 
     this.pos.x += this.velocity.x;
-    this.pos.y = this.ctx.canvas.height - this.hitbox.height;
+    this.pos.y += this.velocity.y;
+
+    if (this.pos.y > this.ctx.canvas.height - this.hitbox.height) {
+      this.velocity.y = 0;
+      console.log('hello');
+    } else this.velocity.y += GRAVITY;
   }
 }

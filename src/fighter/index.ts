@@ -1,4 +1,3 @@
-import controls from '../controls';
 import Game from '../game';
 import type { TCoordinates, THitBox } from '../types';
 
@@ -15,6 +14,8 @@ export default class Fighter {
   pos: TCoordinates;
   lastKey?: string;
   hitbox: THitBox;
+  health: number;
+  isBlocking: boolean;
   velocity: {
     x: number;
     y: number;
@@ -27,105 +28,23 @@ export default class Fighter {
     this.name = name; // this will become an extemtion on custom char
     this.hitbox = { width: 60, height: 180 }; //same here is will become custom variables
     this.velocity = { x: 0, y: 0 };
+    this.health = 100;
+    this.isBlocking = false;
   }
 
-  //   private registerControls(): void {
-  //     // TODO: initialzing the player controls
-
-  //     //controls for player0
-  //     Object.keys(controls[0]).forEach(action => {
-  //       document.addEventListener('keydown', (e: KeyboardEvent) => {
-  //         const isPlayer0 = this.playerNum === 0;
-  //         if (e.code === controls[0][action]) {
-  //           switch (action) {
-  //             case 'left':
-  //               if (isPlayer0) {
-  //                 this.keys.a.pressed = true;
-  //                 this.lastKey = controls[0][action];
-  //                 console.log(this.lastKey, this.keys);
-  //               }
-  //               break;
-  //             case 'right':
-  //               if (isPlayer0) {
-  //                 this.keys.d.pressed = true;
-  //                 this.lastKey = controls[0][action];
-  //                 console.log(this.keys);
-  //               }
-  //               break;
-  //           }
-  //         }
-  //       });
-  //       document.addEventListener('keyup', (e: KeyboardEvent) => {
-  //         const isPlayer0 = this.playerNum === 0;
-  //         if (e.code === controls[0][action]) {
-  //           switch (action) {
-  //             case 'left':
-  //               if (isPlayer0) {
-  //                 this.keys.a.pressed = false;
-  //               }
-  //               break;
-  //             case 'right':
-  //               if (isPlayer0) {
-  //                 this.keys.d.pressed = false;
-  //               }
-  //               break;
-  //           }
-  //         }
-  //       });
-  //     });
-
-  //     // controls for player1
-  //     Object.keys(controls[1]).forEach(action => {
-  //       document.addEventListener('keydown', (e: KeyboardEvent) => {
-  //         const isPlayer1 = this.playerNum === 1;
-  //         if (e.code === controls[1][action]) {
-  //           switch (action) {
-  //             case 'left':
-  //               if (isPlayer1) {
-  //                 this.keys.leftArrow.pressed = true;
-  //                 this.lastKey = controls[1][action];
-  //               }
-  //               break;
-  //             case 'right':
-  //               if (isPlayer1) {
-  //                 this.keys.rightArrow.pressed = true;
-  //                 this.lastKey = controls[1][action];
-  //               }
-  //               break;
-  //           }
-  //         }
-  //       });
-
-  //       document.addEventListener('keyup', (e: KeyboardEvent) => {
-  //         const isPlayer1 = this.playerNum === 1;
-  //         if (e.code === controls[1][action]) {
-  //           switch (action) {
-  //             case 'left':
-  //               if (isPlayer1) {
-  //                 this.keys.leftArrow.pressed = false;
-  //               }
-  //               break;
-  //             case 'right':
-  //               if (isPlayer1) {
-  //                 this.keys.rightArrow.pressed = false;
-  //               }
-  //               break;
-  //           }
-  //         }
-  //       });
-  //     });
-  //   }
-
-  update() {
-    this.pos.x += this.velocity.x;
+  duck(isDownPressed: boolean) {
+    if (isDownPressed) {
+      this.hitbox.height = 90;
+    } else {
+      this.hitbox.height = 180;
+    }
+    this.pos.y = this.ctx.canvas.height - this.hitbox.height;
   }
 
   draw() {
     const { width: charW, height: charH } = this.hitbox;
     const { width: w, height: h } = this.ctx.canvas;
     const { x, y } = this.pos;
-    this.update();
-
     this.ctx.fillStyle = 'red';
     this.ctx.fillRect(x, y, charW, charH);
     // for debug
