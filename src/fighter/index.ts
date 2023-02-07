@@ -41,17 +41,20 @@ export default class Fighter {
     }
     this.pos.y = this.ctx.canvas.height - this.hitbox.height;
   }
+  inAir(): boolean {
+    return this.pos.y < this.ctx.canvas.height - this.hitbox.height;
+  }
 
   draw() {
     const { width: charW, height: charH } = this.hitbox;
-    const { width: w, height: h } = this.ctx.canvas;
+    // const { width: w, height: h } = this.ctx.canvas;
     const { x, y } = this.pos;
     this.ctx.fillStyle = 'red';
     this.ctx.fillRect(x, y, charW, charH);
     // for debug
-    this.ctx.moveTo(w / 2, 0);
-    this.ctx.lineTo(w / 2, h);
-    this.ctx.strokeStyle = 'white';
-    this.ctx.stroke();
+    // this.ctx.moveTo(w / 2, 0);
+    // this.ctx.lineTo(w / 2, h);
+    // this.ctx.strokeStyle = 'white';
+    // this.ctx.stroke();
   }
 }

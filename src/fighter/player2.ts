@@ -56,12 +56,13 @@ export default class Fighter1 extends Fighter {
         if (e.code === player2[action] && e.repeat === false) {
           switch (action) {
             case 'left':
+              if (this.inAir()) break;
               this.keys.a.pressed = true;
               this.lastKey = player2[action];
-              console.log(this.lastKey);
 
               break;
             case 'right':
+              if (this.inAir()) break;
               this.keys.d.pressed = true;
               this.lastKey = player2[action];
 
@@ -72,10 +73,11 @@ export default class Fighter1 extends Fighter {
 
               break;
             case 'up':
-              if (this.pos.y < this.ctx.canvas.height - this.hitbox.height)
-                break;
+              if (this.inAir()) break;
+              // if (this.pos.y < this.ctx.canvas.height - this.hitbox.height)
+
               this.keys.w.pressed = true;
-              this.velocity.y = -20;
+              this.velocity.y = -22;
               break;
           }
         }
@@ -106,7 +108,7 @@ export default class Fighter1 extends Fighter {
   }
 
   update(): void {
-    this.velocity.x = 0;
+    if (!this.inAir()) this.velocity.x = 0;
     if (
       this.keys.a.pressed &&
       this.lastKey === 'KeyA' &&
@@ -126,7 +128,7 @@ export default class Fighter1 extends Fighter {
     this.pos.x += this.velocity.x;
     this.pos.y += this.velocity.y;
 
-    if (this.pos.y > this.ctx.canvas.height - this.hitbox.height) {
+    if (this.pos.y >= this.ctx.canvas.height - this.hitbox.height) {
       this.velocity.y = 0;
     } else this.velocity.y += GRAVITY;
   }
