@@ -1,12 +1,17 @@
+import Game from '.';
+
 interface IGameLoop {
+  game: Game;
   ctx: CanvasRenderingContext2D;
 }
 export default class GameLoop {
+  game: Game;
   ctx: CanvasRenderingContext2D;
   w: number;
   h: number;
 
-  constructor({ ctx }: IGameLoop) {
+  constructor({ ctx, game }: IGameLoop) {
+    this.game = game;
     this.ctx = ctx;
     this.w = ctx.canvas.width;
     this.h = ctx.canvas.height;
@@ -24,5 +29,8 @@ export default class GameLoop {
     console.log('Hello from tick game loop');
 
     this.ctx.clearRect(0, 0, this.w, this.h);
+
+    //draw the players
+    this.game.players.forEach(p => p.draw());
   }
 }
