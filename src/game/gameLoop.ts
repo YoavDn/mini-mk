@@ -29,6 +29,9 @@ export default class GameLoop {
     this.ctx.clearRect(0, 0, this.w, this.h);
 
     //draw the players
-    this.game.players.forEach(p => p.draw());
+    this.game.players.forEach(p => {
+      p.update();
+      p.draw();
+    });
   }
 }

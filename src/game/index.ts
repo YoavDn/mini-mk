@@ -1,4 +1,6 @@
-import Character from '../character';
+import Fighter from '../fighter';
+import Fighter1 from '../fighter/player1';
+import Fighter2 from '../fighter/player2';
 import GameLoop from './gameLoop';
 
 interface IGame {
@@ -10,7 +12,7 @@ export default class Game {
   w: number;
   gameLoop: GameLoop;
   isPause: boolean;
-  players: Character[];
+  players: Fighter[];
 
   constructor({ ctx }: IGame) {
     this.ctx = ctx;
@@ -19,15 +21,15 @@ export default class Game {
     this.isPause = false;
     this.players = [];
 
-    //adding characters manually
+    //adding Fighters manually
     this.addPlayers();
 
     this.gameLoop = new GameLoop({ ctx, game: this });
   }
 
   addPlayers() {
-    const player1 = new Character({ game: this, name: 'Yoav', playerNum: 0 });
-    const player2 = new Character({ game: this, name: 'Aviv', playerNum: 1 });
+    const player1 = new Fighter1(this);
+    const player2 = new Fighter2(this);
     this.players.push(player1, player2);
   }
 

@@ -8,5 +8,7 @@ export type THitBox = {
 };
 
 export type TControls = {
-  [key: string]: string;
-}[];
+  [key: string]: {
+    [key: string]: string;
+  };
+};

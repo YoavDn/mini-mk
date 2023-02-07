@@ -1,14 +1,6 @@
 import { TControls } from './types';
-const controls: TControls = [
-  {
-    left: 'KeyA',
-    right: 'KeyD',
-    up: 'KeyW',
-    down: 'KeyS',
-    attack: 'KeyR',
-    block: 'KeyT',
-  },
-  {
+const controls: TControls = {
+  player1: {
     left: 'ArrowLeft',
     right: 'ArrowRight',
     up: 'ArrowUp',
@@ -16,6 +8,14 @@ const controls: TControls = [
     attack: 'KeyP',
     block: 'KeyO',
   },
-];
+  player2: {
+    left: 'KeyA',
+    right: 'KeyD',
+    up: 'KeyW',
+    down: 'KeyS',
+    attack: 'KeyR',
+    block: 'KeyT',
+  },
+};
 
 export default controls;
