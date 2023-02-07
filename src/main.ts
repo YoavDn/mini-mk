@@ -1,16 +1,12 @@
-import "./style.css";
+import './style.css';
+import Game from './game';
 
-const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-
-const w = (canvas.width = 700)
-const h = (canvas.height = 500)
+const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 
 function main() {
-  const ctx = canvas.getContext("2d")!
-
-  ctx.beginPath()
-  ctx.fillRect(0, 0, w, h)
-
+  const ctx = canvas.getContext('2d')!;
+  const game = new Game({ ctx });
+  game.start();
 }
 
 onload = () => main();
