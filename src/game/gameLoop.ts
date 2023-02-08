@@ -28,6 +28,9 @@ export default class GameLoop {
   private tick() {
     this.ctx.clearRect(0, 0, this.w, this.h);
 
+    //draw the background
+    this.game.sence.draw();
+
     //draw the players
     this.game.players.forEach(p => {
       p.update();

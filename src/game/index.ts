@@ -1,4 +1,8 @@
+//assets
+import backgroundImg from '../../imgs/background.png';
+
 import Fighter from '../fighter';
+import Sence from './sence';
 import Fighter1 from '../fighter/player1';
 import Fighter2 from '../fighter/player2';
 import GameLoop from './gameLoop';
@@ -11,6 +15,7 @@ export default class Game {
   h: number;
   w: number;
   gameLoop: GameLoop;
+  sence: Sence;
   isPause: boolean;
   players: Fighter[];
 
@@ -20,6 +25,12 @@ export default class Game {
     this.ctx.canvas.height = this.h = 600;
     this.isPause = false;
     this.players = [];
+    this.sence = new Sence({
+      width: this.w,
+      height: this.h,
+      game: this,
+      imgSrc: backgroundImg,
+    });
 
     //adding Fighters manually
     this.addPlayers();
