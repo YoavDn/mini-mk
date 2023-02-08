@@ -1,7 +1,7 @@
 import Fighter from '.';
 import Game from '../game';
 import controls from '../controls';
-import { GRAVITY } from '../utils';
+import { GRAVITY, GROUND_LEVEL } from '../utils';
 interface IKeys {
   ArrowLeft: {
     pressed: boolean;
@@ -44,8 +44,8 @@ export default class Fighter1 extends Fighter {
     const btm = this.ctx.canvas.height;
     const { width: charW, height: charH } = this.hitbox;
     const xPos = this.ctx.canvas.width / 2 - charW * 3;
-    const yPos = btm - charH;
-    this.pos = { x: xPos, y: 300 };
+    const yPos = btm - charH - GROUND_LEVEL;
+    this.pos = { x: xPos, y: yPos };
   }
 
   regeisterControls() {
@@ -56,6 +56,7 @@ export default class Fighter1 extends Fighter {
           switch (action) {
             case 'left':
               if (this.inAir()) break;
+              console.log('left');
               this.keys.ArrowLeft.pressed = true;
               this.lastKey = player1[action];
 
@@ -126,7 +127,11 @@ export default class Fighter1 extends Fighter {
     this.pos.x += this.velocity.x;
     this.pos.y += this.velocity.y;
 
-    if (this.pos.y >= this.ctx.canvas.height - this.hitbox.height) {
+    //detemining if player on ground
+    if (
+      this.pos.y >=
+      this.ctx.canvas.height - GROUND_LEVEL - this.hitbox.height
+    ) {
       this.velocity.y = 0;
     } else this.velocity.y += GRAVITY;
   }

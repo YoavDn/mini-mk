@@ -24,6 +24,16 @@ export default class Sence {
   draw() {
     const { ctx } = this.game;
 
-    ctx.drawImage(this.background, 0, 0, this.width, this.height);
+    ctx.drawImage(
+      this.background,
+      0,
+      0,
+      this.background.width,
+      this.background.height,
+      0,
+      0,
+      this.width,
+      this.height
+    );
   }
 }

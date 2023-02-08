@@ -1,5 +1,6 @@
 import Game from '../game';
 import type { TCoordinates, THitBox } from '../types';
+import { GROUND_LEVEL } from '../utils';
 const GRAVITY = 0.7;
 export interface ICharacter {
   game: Game;
@@ -39,10 +40,13 @@ export default class Fighter {
     } else {
       this.hitbox.height = 180;
     }
-    this.pos.y = this.ctx.canvas.height - this.hitbox.height;
+    this.pos.y = this.ctx.canvas.height - this.hitbox.height - GROUND_LEVEL;
   }
   inAir(): boolean {
-    return this.pos.y < this.ctx.canvas.height - this.hitbox.height;
+    return !(
+      this.pos.y >=
+      this.ctx.canvas.height - GROUND_LEVEL - this.hitbox.height
+    );
   }
 
   draw() {

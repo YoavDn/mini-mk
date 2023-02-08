@@ -1,7 +1,7 @@
 import Fighter from '.';
 import controls from '../controls';
 import Game from '../game';
-import { GRAVITY } from '../utils';
+import { GRAVITY, GROUND_LEVEL } from '../utils';
 
 interface IKeys {
   a: {
@@ -45,7 +45,7 @@ export default class Fighter1 extends Fighter {
     const btm = this.ctx.canvas.height;
     const { width: charW, height: charH } = this.hitbox;
     const xPos = this.ctx.canvas.width / 2 + charW * 2;
-    const yPos = btm - charH;
+    const yPos = btm - charH - GROUND_LEVEL;
     this.pos = { x: xPos, y: yPos };
   }
 
@@ -128,7 +128,10 @@ export default class Fighter1 extends Fighter {
     this.pos.x += this.velocity.x;
     this.pos.y += this.velocity.y;
 
-    if (this.pos.y >= this.ctx.canvas.height - this.hitbox.height) {
+    if (
+      this.pos.y >=
+      this.ctx.canvas.height - GROUND_LEVEL - this.hitbox.height
+    ) {
       this.velocity.y = 0;
     } else this.velocity.y += GRAVITY;
   }

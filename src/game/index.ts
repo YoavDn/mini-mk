@@ -21,7 +21,7 @@ export default class Game {
 
   constructor({ ctx }: IGame) {
     this.ctx = ctx;
-    this.ctx.canvas.width = this.w = 900;
+    this.ctx.canvas.width = this.w = 1000;
     this.ctx.canvas.height = this.h = 600;
     this.isPause = false;
     this.players = [];
