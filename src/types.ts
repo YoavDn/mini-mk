@@ -12,3 +12,10 @@ export type TControls = {
     [key: string]: string;
   };
 };
+
+export type RectType = {
+  a: TCoordinates;
+  b: TCoordinates;
+  c: TCoordinates;
+  d: TCoordinates;
+};

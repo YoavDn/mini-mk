@@ -1,5 +1,6 @@
 import Fighter from '.';
 import Game from '../game';
+import Obstacle from '../obstacle';
 import controls from '../controls';
 import { GRAVITY, GROUND_LEVEL } from '../utils';
 interface IKeys {
@@ -19,6 +20,7 @@ interface IKeys {
 
 export default class Fighter1 extends Fighter {
   keys: IKeys;
+  obstacle: Obstacle;
 
   constructor(game: Game) {
     super({ playerNum: 0, game, name: 'Yoav' });
@@ -38,6 +40,11 @@ export default class Fighter1 extends Fighter {
     };
     this.startPos();
     this.regeisterControls();
+    this.obstacle = new Obstacle({
+      pos: this.pos,
+      width: this.hitbox.width,
+      height: this.hitbox.height,
+    });
   }
 
   startPos() {
