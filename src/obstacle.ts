@@ -27,4 +27,22 @@ export default class Obstacle {
       this.pos.x = this.game.ctx.canvas.width - this.width;
     }
   }
+
+  fightersCollide() {
+    const [p1, p2] = this.game.players;
+
+    //player in player
+    // rect1.x < rect2.x + rect2.w &&
+    //   rect1.x + rect1.w > rect2.x &&
+    //   rect1.y < rect2.y + rect2.h &&
+    //   rect1.h + rect1.y > rect2.y;
+    if (
+      p1.pos.x < p2.pos.x + p2.hitbox.width &&
+      p1.pos.x + p1.hitbox.width > p2.pos.x &&
+      p1.pos.y < p2.pos.y + p2.hitbox.height &&
+      p1.hitbox.height + p1.pos.y > p2.pos.y
+    ) {
+      console.log('v is my girl');
+    }
+  }
 }

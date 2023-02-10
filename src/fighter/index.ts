@@ -78,6 +78,7 @@ export default class Fighter {
 
     const { x, y } = this.pos;
     this.obstacle.borderCollide();
+    this.obstacle.fightersCollide();
 
     this.ctx.fillStyle = 'red';
     this.ctx.fillRect(x, y, charW, charH);
