@@ -112,7 +112,7 @@ export default class Fighter1 extends Fighter {
 
   update(): void {
     if (!this.inAir()) this.velocity.x = 0;
-    this.collide();
+
     this.moveLeft(
       this.keys.ArrowLeft.pressed,
       this.keys.ArrowDown.pressed,

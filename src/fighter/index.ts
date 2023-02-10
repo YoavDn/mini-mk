@@ -34,6 +34,7 @@ export default class Fighter {
     this.health = 100;
     this.isBlocking = false;
     this.obstacle = new Obstacle({
+      game,
       pos: this.pos,
       width: this.hitbox.width,
       height: this.hitbox.height,
@@ -56,12 +57,6 @@ export default class Fighter {
     );
   }
 
-  collide() {
-    if (this.obstacle.testCollideWith()) {
-      this.pos.x = 0;
-    }
-  }
-
   moveLeft(leftKeyPressed: boolean, downKeyPressed: boolean, lastKey: string) {
     if (leftKeyPressed && this.lastKey === lastKey && !downKeyPressed) {
       this.velocity.x = -5;
@@ -80,8 +75,10 @@ export default class Fighter {
 
   draw() {
     const { width: charW, height: charH } = this.hitbox;
-    // const { width: w, height: h } = this.ctx.canvas;
+
     const { x, y } = this.pos;
+    this.obstacle.borderCollide();
+
     this.ctx.fillStyle = 'red';
     this.ctx.fillRect(x, y, charW, charH);
     // for debug
