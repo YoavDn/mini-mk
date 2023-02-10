@@ -1,7 +1,8 @@
 import Game from '../game';
 import type { TCoordinates, THitBox } from '../types';
 import { GROUND_LEVEL } from '../utils';
-const GRAVITY = 0.7;
+import Obstacle from '../obstacle';
+
 export interface ICharacter {
   game: Game;
   name: string;
@@ -11,6 +12,7 @@ export interface ICharacter {
 export default class Fighter {
   playerNum: 0 | 1;
   ctx: CanvasRenderingContext2D;
+  obstacle: Obstacle;
   name: string;
   pos: TCoordinates;
   lastKey?: string;
@@ -31,6 +33,11 @@ export default class Fighter {
     this.velocity = { x: 0, y: 0 };
     this.health = 100;
     this.isBlocking = false;
+    this.obstacle = new Obstacle({
+      pos: this.pos,
+      width: this.hitbox.width,
+      height: this.hitbox.height,
+    });
   }
 
   duck(isDownPressed: boolean) {
@@ -47,6 +54,28 @@ export default class Fighter {
       this.pos.y >=
       this.ctx.canvas.height - GROUND_LEVEL - this.hitbox.height
     );
+  }
+
+  collide() {
+    if (this.obstacle.testCollideWith()) {
+      this.pos.x = 0;
+    }
+  }
+
+  moveLeft(leftKeyPressed: boolean, downKeyPressed: boolean, lastKey: string) {
+    if (leftKeyPressed && this.lastKey === lastKey && !downKeyPressed) {
+      this.velocity.x = -5;
+    }
+  }
+
+  moveRight(
+    rightKeyPressed: boolean,
+    downKeyPressed: boolean,
+    lastKey: string
+  ) {
+    if (rightKeyPressed && this.lastKey === lastKey && !downKeyPressed) {
+      this.velocity.x = 5;
+    }
   }
 
   draw() {

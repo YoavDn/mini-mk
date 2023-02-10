@@ -20,7 +20,6 @@ interface IKeys {
 
 export default class Fighter1 extends Fighter {
   keys: IKeys;
-  obstacle: Obstacle;
 
   constructor(game: Game) {
     super({ playerNum: 0, game, name: 'Yoav' });
@@ -40,11 +39,7 @@ export default class Fighter1 extends Fighter {
     };
     this.startPos();
     this.regeisterControls();
-    this.obstacle = new Obstacle({
-      pos: this.pos,
-      width: this.hitbox.width,
-      height: this.hitbox.height,
-    });
+    this.obstacle.pos = this.pos;
   }
 
   startPos() {
@@ -64,6 +59,7 @@ export default class Fighter1 extends Fighter {
             case 'left':
               if (this.inAir()) break;
               console.log('left');
+
               this.keys.ArrowLeft.pressed = true;
               this.lastKey = player1[action];
 
@@ -116,19 +112,18 @@ export default class Fighter1 extends Fighter {
 
   update(): void {
     if (!this.inAir()) this.velocity.x = 0;
-    if (
-      this.keys.ArrowLeft.pressed &&
-      this.lastKey === 'ArrowLeft' &&
-      !this.keys.ArrowDown.pressed
-    ) {
-      this.velocity.x = -5;
-    } else if (
-      this.keys.ArrowRight.pressed &&
-      this.lastKey === 'ArrowRight' &&
-      !this.keys.ArrowDown.pressed
-    ) {
-      this.velocity.x = 5;
-    }
+    this.collide();
+    this.moveLeft(
+      this.keys.ArrowLeft.pressed,
+      this.keys.ArrowDown.pressed,
+      'ArrowLeft'
+    );
+    this.moveRight(
+      this.keys.ArrowRight.pressed,
+      this.keys.ArrowDown.pressed,
+      'ArrowRight'
+    );
+
     if (!this.keys.ArrowUp.pressed) this.duck(this.keys.ArrowDown.pressed);
 
     this.pos.x += this.velocity.x;

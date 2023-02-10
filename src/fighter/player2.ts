@@ -39,6 +39,7 @@ export default class Fighter1 extends Fighter {
 
     this.startPos();
     this.regeisterControls();
+    this.obstacle.pos = this.pos;
   }
 
   startPos() {
@@ -109,19 +110,9 @@ export default class Fighter1 extends Fighter {
 
   update(): void {
     if (!this.inAir()) this.velocity.x = 0;
-    if (
-      this.keys.a.pressed &&
-      this.lastKey === 'KeyA' &&
-      !this.keys.s.pressed
-    ) {
-      this.velocity.x = -5;
-    } else if (
-      this.keys.d.pressed &&
-      this.lastKey === 'KeyD' &&
-      !this.keys.s.pressed
-    ) {
-      this.velocity.x = 5;
-    }
+    this.collide();
+    this.moveLeft(this.keys.a.pressed, this.keys.s.pressed, 'KeyA');
+    this.moveRight(this.keys.d.pressed, this.keys.s.pressed, 'KeyD');
 
     if (!this.keys.w.pressed) this.duck(this.keys.s.pressed);
 
