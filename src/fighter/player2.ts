@@ -36,7 +36,7 @@ export default class Fighter1 extends Fighter {
         pressed: false,
       },
     };
-
+    this.color = 'green';
     this.startPos();
     this.regeisterControls();
     this.obstacle.pos = this.pos;

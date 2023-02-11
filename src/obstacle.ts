@@ -42,7 +42,21 @@ export default class Obstacle {
       p1.pos.y < p2.pos.y + p2.hitbox.height &&
       p1.hitbox.height + p1.pos.y > p2.pos.y
     ) {
-      console.log('v is my girl');
+      if (p1.pos.x < p2.pos.x) {
+        if (p1.keys?.ArrowRight.pressed && p2.keys?.a.pressed) {
+        } else if (p1.keys?.ArrowRight.pressed && !p2.keys?.a.pressed) {
+          p2.pos.x = p1.pos.x + p1.hitbox.width;
+        } else if (p2.keys?.a.pressed && !p1.keys?.ArrowLeft.pressed) {
+          p1.pos.x = p2.pos.x - p1.hitbox.width;
+        }
+      } else {
+        if (p1.keys?.ArrowLeft.pressed && !p2.keys?.d.pressed) {
+          p2.pos.x = p1.pos.x - p2.hitbox.width;
+        }
+        if (p2.keys?.d.pressed && !p1.keys?.ArrowRight.pressed) {
+          p1.pos.x = p2.pos.x + p2.hitbox.width;
+        }
+      }
     }
   }
 }

@@ -2,6 +2,7 @@ import Game from '../game';
 import type { TCoordinates, THitBox } from '../types';
 import { GROUND_LEVEL } from '../utils';
 import Obstacle from '../obstacle';
+import { IKeys } from '../types';
 
 export interface ICharacter {
   game: Game;
@@ -11,6 +12,8 @@ export interface ICharacter {
 
 export default class Fighter {
   playerNum: 0 | 1;
+  color?: string;
+  keys?: IKeys;
   ctx: CanvasRenderingContext2D;
   obstacle: Obstacle;
   name: string;
@@ -80,7 +83,7 @@ export default class Fighter {
     this.obstacle.borderCollide();
     this.obstacle.fightersCollide();
 
-    this.ctx.fillStyle = 'red';
+    this.ctx.fillStyle = this.color ?? 'red';
     this.ctx.fillRect(x, y, charW, charH);
     // for debug
     // this.ctx.moveTo(w / 2, 0);

@@ -19,3 +19,30 @@ export type RectType = {
   c: TCoordinates;
   d: TCoordinates;
 };
+
+export interface IKeys {
+  ArrowLeft: {
+    pressed: boolean;
+  };
+  ArrowRight: {
+    pressed: boolean;
+  };
+  ArrowDown: {
+    pressed: boolean;
+  };
+  ArrowUp: {
+    pressed: boolean;
+  };
+  a: {
+    pressed: boolean;
+  };
+  d: {
+    pressed: boolean;
+  };
+  s: {
+    pressed: boolean;
+  };
+  w: {
+    pressed: boolean;
+  };
+}

@@ -1,6 +1,6 @@
 import Fighter from '.';
 import Game from '../game';
-import Obstacle from '../obstacle';
+
 import controls from '../controls';
 import { GRAVITY, GROUND_LEVEL } from '../utils';
 interface IKeys {
@@ -37,7 +37,9 @@ export default class Fighter1 extends Fighter {
         pressed: false,
       },
     };
+
     this.startPos();
+    this.color = 'red';
     this.regeisterControls();
     this.obstacle.pos = this.pos;
   }
