@@ -44,6 +44,9 @@ export default class Obstacle {
     ) {
       if (p1.pos.x < p2.pos.x) {
         if (p1.keys?.ArrowRight.pressed && p2.keys?.a.pressed) {
+          const temp = p1.pos.x;
+          p1.pos.x = p2.pos.x - p1.hitbox.width;
+          p2.pos.x = temp + p1.hitbox.width;
         } else if (p1.keys?.ArrowRight.pressed && !p2.keys?.a.pressed) {
           p2.pos.x = p1.pos.x + p1.hitbox.width;
         } else if (p2.keys?.a.pressed && !p1.keys?.ArrowLeft.pressed) {
