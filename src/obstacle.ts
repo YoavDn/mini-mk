@@ -54,7 +54,8 @@ export default class Obstacle {
           p2.pos.x = temp + p1.hitbox.width;
         } else if (
           (p1.keys?.ArrowRight.pressed && !p2.keys?.a.pressed) ||
-          p1.inAir()
+          p1.inAir() ||
+          p2.inAir()
         ) {
           //when on border
           if (p2.pos.x + p2.hitbox.width >= this.game.ctx.canvas.width) {
@@ -64,7 +65,8 @@ export default class Obstacle {
           }
         } else if (
           (p2.keys?.a.pressed && !p1.keys?.ArrowLeft.pressed) ||
-          p1.inAir()
+          p1.inAir() ||
+          p2.inAir()
         ) {
           if (p2.pos.x < p2.hitbox.width) {
             p2.pos.x = p2.hitbox.width;

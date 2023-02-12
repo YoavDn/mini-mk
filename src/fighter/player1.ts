@@ -60,7 +60,6 @@ export default class Fighter1 extends Fighter {
           switch (action) {
             case 'left':
               if (this.inAir()) break;
-              console.log('left');
 
               this.keys.ArrowLeft.pressed = true;
               this.lastKey = player1[action];

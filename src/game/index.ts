@@ -6,6 +6,7 @@ import Sence from './sence';
 import Fighter1 from '../fighter/player1';
 import Fighter2 from '../fighter/player2';
 import GameLoop from './gameLoop';
+import Gui from '../gui/gui';
 
 interface IGame {
   ctx: CanvasRenderingContext2D;
@@ -15,6 +16,7 @@ export default class Game {
   h: number;
   w: number;
   gameLoop: GameLoop;
+  gui: Gui;
   sence: Sence;
   isPause: boolean;
   players: Fighter[];
@@ -35,6 +37,7 @@ export default class Game {
     //adding Fighters manually
     this.addPlayers();
 
+    this.gui = new Gui(this);
     this.gameLoop = new GameLoop({ ctx, game: this });
   }
 

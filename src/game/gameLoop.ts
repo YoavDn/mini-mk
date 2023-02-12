@@ -30,6 +30,8 @@ export default class GameLoop {
 
     //draw the background
     this.game.sence.draw();
+    // drawing  the gui
+    this.game.gui.draw();
 
     //draw the players
     this.game.players.forEach(p => {
