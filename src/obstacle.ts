@@ -44,18 +44,28 @@ export default class Obstacle {
     ) {
       //player1 in on left
       if (p1.pos.x < p2.pos.x) {
-        if (p1.keys?.ArrowRight.pressed && p2.keys?.a.pressed) {
+        if (
+          (p1.keys?.ArrowRight.pressed && p2.keys?.a.pressed) ||
+          p1.inAir() ||
+          p2.inAir()
+        ) {
           const temp = p1.pos.x;
           p1.pos.x = p2.pos.x - p1.hitbox.width;
           p2.pos.x = temp + p1.hitbox.width;
-        } else if (p1.keys?.ArrowRight.pressed && !p2.keys?.a.pressed) {
+        } else if (
+          (p1.keys?.ArrowRight.pressed && !p2.keys?.a.pressed) ||
+          p1.inAir()
+        ) {
           //when on border
           if (p2.pos.x + p2.hitbox.width >= this.game.ctx.canvas.width) {
             p1.pos.x = p2.pos.x - p1.hitbox.width;
           } else {
             p2.pos.x = p1.pos.x + p1.hitbox.width;
           }
-        } else if (p2.keys?.a.pressed && !p1.keys?.ArrowLeft.pressed) {
+        } else if (
+          (p2.keys?.a.pressed && !p1.keys?.ArrowLeft.pressed) ||
+          p1.inAir()
+        ) {
           if (p2.pos.x < p2.hitbox.width) {
             p2.pos.x = p2.hitbox.width;
           } else {
@@ -64,7 +74,11 @@ export default class Obstacle {
         }
         //player2 in on left
       } else {
-        if (p1.keys?.ArrowLeft.pressed && p2.keys?.d.pressed) {
+        if (
+          (p1.keys?.ArrowLeft.pressed && p2.keys?.d.pressed) ||
+          p2.inAir() ||
+          p1.inAir()
+        ) {
           const temp = p2.pos.x;
           p2.pos.x = p1.pos.x - p2.hitbox.width;
           p1.pos.x = temp + p2.hitbox.width;
