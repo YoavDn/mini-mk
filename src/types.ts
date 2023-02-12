@@ -33,6 +33,9 @@ export interface IKeys {
   ArrowUp: {
     pressed: boolean;
   };
+  b: {
+    pressed: boolean;
+  };
   a: {
     pressed: boolean;
   };
@@ -43,6 +46,9 @@ export interface IKeys {
     pressed: boolean;
   };
   w: {
+    pressed: boolean;
+  };
+  r: {
     pressed: boolean;
   };
 }

@@ -16,6 +16,9 @@ interface IKeys {
   ArrowUp: {
     pressed: boolean;
   };
+  b: {
+    pressed: boolean;
+  };
 }
 
 export default class Fighter1 extends Fighter {
@@ -34,6 +37,9 @@ export default class Fighter1 extends Fighter {
         pressed: false,
       },
       ArrowUp: {
+        pressed: false,
+      },
+      b: {
         pressed: false,
       },
     };
@@ -82,6 +88,9 @@ export default class Fighter1 extends Fighter {
               this.keys.ArrowUp.pressed = true;
               this.velocity.y = -22;
               break;
+            case 'block':
+              if (this.inAir()) break;
+              this.keys.b.pressed = true;
           }
         }
       });
@@ -91,19 +100,18 @@ export default class Fighter1 extends Fighter {
           switch (action) {
             case 'left':
               this.keys.ArrowLeft.pressed = false;
-
               break;
             case 'right':
               this.keys.ArrowRight.pressed = false;
-
               break;
             case 'down':
               this.keys.ArrowDown.pressed = false;
-
               break;
             case 'up':
               this.keys.ArrowUp.pressed = false;
-
+              break;
+            case 'block':
+              this.keys.b.pressed = false;
               break;
           }
         }
@@ -113,6 +121,7 @@ export default class Fighter1 extends Fighter {
 
   update(): void {
     if (!this.inAir()) this.velocity.x = 0;
+    this.block(this.keys.b.pressed);
 
     this.moveLeft(
       this.keys.ArrowLeft.pressed,

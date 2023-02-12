@@ -61,6 +61,7 @@ export default class Fighter {
   }
 
   moveLeft(leftKeyPressed: boolean, downKeyPressed: boolean, lastKey: string) {
+    if (this.isBlocking) return;
     if (leftKeyPressed && this.lastKey === lastKey && !downKeyPressed) {
       this.velocity.x = -5;
     }
@@ -71,9 +72,15 @@ export default class Fighter {
     downKeyPressed: boolean,
     lastKey: string
   ) {
+    if (this.isBlocking) return;
     if (rightKeyPressed && this.lastKey === lastKey && !downKeyPressed) {
       this.velocity.x = 5;
     }
+  }
+
+  block(isBlockBtnPressed: boolean) {
+    if (this.inAir()) return;
+    this.isBlocking = isBlockBtnPressed ? true : false;
   }
 
   draw() {
@@ -83,8 +90,14 @@ export default class Fighter {
     this.obstacle.borderCollide();
     this.obstacle.fightersCollide();
 
+    this.ctx.lineWidth = 2;
+    this.ctx.save();
+    this.ctx.beginPath();
     this.ctx.fillStyle = this.color ?? 'red';
+    this.ctx.strokeStyle = this.isBlocking ? 'white' : 'gray';
     this.ctx.fillRect(x, y, charW, charH);
+    this.ctx.rect(x, y, charW, charH);
+    this.ctx.stroke();
     // for debug
     // this.ctx.moveTo(w / 2, 0);
     // this.ctx.lineTo(w / 2, h);

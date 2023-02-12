@@ -16,6 +16,9 @@ interface IKeys {
   w: {
     pressed: boolean;
   };
+  r: {
+    pressed: boolean;
+  };
 }
 
 export default class Fighter1 extends Fighter {
@@ -35,8 +38,11 @@ export default class Fighter1 extends Fighter {
       w: {
         pressed: false,
       },
+      r: {
+        pressed: false,
+      },
     };
-    this.color = 'yellow';
+    this.color = 'blue';
     this.startPos();
     this.regeisterControls();
     this.obstacle.pos = this.pos;
@@ -75,10 +81,12 @@ export default class Fighter1 extends Fighter {
               break;
             case 'up':
               if (this.inAir()) break;
-              // if (this.pos.y < this.ctx.canvas.height - this.hitbox.height)
-
               this.keys.w.pressed = true;
               this.velocity.y = -22;
+              break;
+            case 'block':
+              if (this.inAir()) break;
+              this.keys.r.pressed = true;
               break;
           }
         }
@@ -92,15 +100,15 @@ export default class Fighter1 extends Fighter {
               break;
             case 'right':
               this.keys.d.pressed = false;
-
               break;
             case 'down':
               this.keys.s.pressed = false;
-
               break;
             case 'up':
               this.keys.w.pressed = false;
-
+              break;
+            case 'block':
+              this.keys.r.pressed = false;
               break;
           }
         }
@@ -110,6 +118,7 @@ export default class Fighter1 extends Fighter {
 
   update(): void {
     if (!this.inAir()) this.velocity.x = 0;
+    this.block(this.keys.r.pressed);
 
     this.moveLeft(this.keys.a.pressed, this.keys.s.pressed, 'KeyA');
     this.moveRight(this.keys.d.pressed, this.keys.s.pressed, 'KeyD');
