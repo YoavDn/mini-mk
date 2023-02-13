@@ -4,7 +4,7 @@ const yoyo: FighterData = {
   fighterMoves: {
     basic: [
       {
-        MoveInstructions: ['1'],
+        MoveInstructions: ['one'],
         moveName: 'Back Hand',
         moveData: {
           moveType: 'high',
