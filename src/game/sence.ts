@@ -1,4 +1,4 @@
-import Game from '.';
+import Game from './game';
 
 interface ISence {
   game: Game;

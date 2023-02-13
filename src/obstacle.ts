@@ -1,5 +1,5 @@
 // import { Vector, Box, Circle, Polygon, Collider2d } from 'collider2d';
-import Game from './game';
+import Game from './game/game';
 import { TCoordinates, RectType } from './types';
 
 interface IObstacle {

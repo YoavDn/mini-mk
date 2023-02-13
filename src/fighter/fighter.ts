@@ -1,4 +1,4 @@
-import Game from '../game';
+import Game from '../game/game';
 import type { TCoordinates, THitBox } from '../types';
 import { GROUND_LEVEL } from '../utils';
 import Obstacle from '../obstacle';
@@ -81,6 +81,10 @@ export default class Fighter {
   block(isBlockBtnPressed: boolean) {
     if (this.inAir()) return;
     this.isBlocking = isBlockBtnPressed ? true : false;
+  }
+
+  update() {
+    //
   }
 
   draw() {

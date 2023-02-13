@@ -1,5 +1,5 @@
-import Fighter from '.';
-import Game from '../game';
+import Fighter from './fighter';
+import Game from '../game/game';
 
 import controls from '../controls';
 import { GRAVITY, GROUND_LEVEL } from '../utils';

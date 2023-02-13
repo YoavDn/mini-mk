@@ -52,3 +52,32 @@ export interface IKeys {
     pressed: boolean;
   };
 }
+type moveType = 'mid' | 'high' | 'low';
+type controls = 'd' | 'u' | 'l' | 'r' | '1' | '2';
+type MoveInstructions = controls[];
+
+export interface FighterData {
+  fighterName: string;
+  fighterMoves: {
+    specials: FighterMove[];
+    basic: FighterMove[];
+  };
+}
+
+export type FighterMove = {
+  MoveInstructions: MoveInstructions;
+  moveName: string;
+  moveData: {
+    moveType: moveType;
+    damage: number;
+    blockDamage: number;
+    moveHitbox: THitBox;
+  };
+  frameData: {
+    startup: number;
+    active: number;
+    recover: number;
+    blockAdv: number;
+    hitAdv: number;
+  };
+};

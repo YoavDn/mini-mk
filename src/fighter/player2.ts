@@ -1,6 +1,6 @@
-import Fighter from '.';
+import Fighter from './fighter';
 import controls from '../controls';
-import Game from '../game';
+import Game from '../game/game';
 import { GRAVITY, GROUND_LEVEL } from '../utils';
 
 interface IKeys {

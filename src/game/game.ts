@@ -1,7 +1,7 @@
 //assets
 import backgroundImg from '../../imgs/background.png';
 
-import Fighter from '../fighter';
+import Fighter from '../fighter/fighter';
 import Sence from './sence';
 import Fighter1 from '../fighter/player1';
 import Fighter2 from '../fighter/player2';

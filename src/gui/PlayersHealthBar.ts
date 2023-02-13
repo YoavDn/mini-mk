@@ -1,5 +1,5 @@
-import Fighter from '../fighter';
-import Game from '../game';
+import Fighter from '../fighter/fighter';
+import Game from '../game/game';
 
 export default class PlayersHealthBar {
   game: Game;
