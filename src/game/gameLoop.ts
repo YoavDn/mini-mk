@@ -19,6 +19,7 @@ export default class GameLoop {
   }
 
   private init() {
+    if (this.game.isEnded) return;
     window.requestAnimationFrame(() => {
       this.tick();
       this.init();

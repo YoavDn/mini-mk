@@ -19,6 +19,7 @@ export default class Game {
   gui: Gui;
   sence: Sence;
   isPause: boolean;
+  isEnded: boolean;
   players: Fighter[];
   frames: number;
 
@@ -28,6 +29,7 @@ export default class Game {
     this.ctx.canvas.width = this.w = 1000;
     this.ctx.canvas.height = this.h = 600;
     this.isPause = false;
+    this.isEnded = false;
     this.players = [];
     this.sence = new Sence({
       width: this.w,
@@ -58,9 +60,15 @@ export default class Game {
   }
   checkGameOver() {
     if (this.players[1].health < 0 || this.players[0].health < 0) {
-      console.log('gameOver');
+      this.endGame();
     }
   }
 
-  ended() {}
+  endGame() {
+    this.ctx.fillStyle = 'black';
+    this.ctx.beginPath();
+    this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.ctx.fill();
+    this.isEnded = true;
+  }
 }
