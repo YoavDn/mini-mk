@@ -6,6 +6,7 @@ const controls: TControls = {
     up: 'ArrowUp',
     down: 'ArrowDown',
     one: 'KeyN',
+    two: 'KeyM',
     block: 'KeyB',
   },
   player2: {
@@ -14,6 +15,7 @@ const controls: TControls = {
     up: 'KeyW',
     down: 'KeyS',
     one: 'KeyT',
+    two: 'KeyY',
     block: 'KeyR',
   },
 };

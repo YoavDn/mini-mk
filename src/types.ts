@@ -72,6 +72,9 @@ export interface IKeys {
   a: {
     pressed: boolean;
   };
+  a2: {
+    pressed: boolean;
+  };
 }
 
 type moveType = 'mid' | 'high' | 'low';

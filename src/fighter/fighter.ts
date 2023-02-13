@@ -81,6 +81,9 @@ export default class Fighter {
       a: {
         pressed: false,
       },
+      a2: {
+        pressed: false,
+      },
     };
   }
 
@@ -144,7 +147,17 @@ export default class Fighter {
         move => move.MoveInstructions.join() === 'd,one'
       );
       if (!move) return;
-
+      this.fighterMoves.execute(move);
+    } else if (
+      !this.keys.l.pressed &&
+      !this.keys.r.pressed &&
+      this.keys.a2.pressed &&
+      !this.keys.d.pressed
+    ) {
+      const move = this.fighterMoves.basic.find(
+        move => move.MoveInstructions.join() === 'two'
+      );
+      if (!move) return;
       this.fighterMoves.execute(move);
     }
   }

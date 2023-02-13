@@ -61,6 +61,11 @@ export default class Fighter1 extends Fighter {
               this.keys.a.pressed = true;
               this.moveStack.push('one');
               break;
+            case 'two':
+              if (this.inAir()) break;
+              this.keys.a2.pressed = true;
+              this.moveStack.push('one');
+              break;
           }
         }
       });
@@ -85,6 +90,9 @@ export default class Fighter1 extends Fighter {
               break;
             case 'one':
               this.keys.a.pressed = false;
+              break;
+            case 'two':
+              this.keys.a2.pressed = false;
               break;
           }
         }

@@ -21,6 +21,7 @@ const yoyo: FighterData = {
           hitAdv: 7,
         },
       },
+
       {
         MoveInstructions: ['d', 'one'],
         moveName: 'Low Chop',
@@ -37,6 +38,24 @@ const yoyo: FighterData = {
           recover: 14,
           startup: 7,
           hitAdv: 15,
+        },
+      },
+      {
+        MoveInstructions: ['two'],
+        moveName: 'Strong Leg',
+        moveData: {
+          moveType: 'high',
+          blockDamage: 1.4,
+          damage: 7,
+          reach: 150,
+          blockPushOff: 60,
+        },
+        frameData: {
+          active: 3,
+          blockAdv: 0,
+          recover: 25,
+          startup: 15,
+          hitAdv: 13,
         },
       },
     ],
