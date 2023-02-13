@@ -56,4 +56,11 @@ export default class Game {
   start() {
     console.log('game start');
   }
+  checkGameOver() {
+    if (this.players[1].health < 0 || this.players[0].health < 0) {
+      console.log('gameOver');
+    }
+  }
+
+  ended() {}
 }

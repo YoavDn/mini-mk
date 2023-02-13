@@ -60,7 +60,6 @@ export default class Fighter {
       this.game,
       charactersData[this.name]
     );
-    console.log(this.fighterMoves);
 
     this.keys = {
       l: {

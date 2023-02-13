@@ -29,6 +29,8 @@ export default class GameLoop {
     this.game.frames++;
     this.ctx.clearRect(0, 0, this.w, this.h);
 
+    this.game.checkGameOver();
+
     //draw the background
     this.game.sence.draw();
     // drawing  the gui
