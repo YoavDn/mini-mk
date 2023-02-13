@@ -18,7 +18,7 @@ const yoyo: FighterData = {
           blockAdv: 0,
           recover: 15,
           startup: 7,
-          hitAdv: 30,
+          hitAdv: 7,
         },
       },
       {
@@ -28,7 +28,7 @@ const yoyo: FighterData = {
           moveType: 'mid',
           blockDamage: 0.4,
           damage: 2,
-          reach: 80,
+          reach: 100,
           blockPushOff: 10,
         },
         frameData: {

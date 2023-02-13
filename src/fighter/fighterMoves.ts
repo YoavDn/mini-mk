@@ -48,9 +48,12 @@ export default class FighterMoves {
           ememy.isHit = false;
         }, Math.abs(16 * move.frameData.blockAdv));
       } else {
-        if (move.moveData.moveType === 'high' && !ememy.isDucking) {
+        if (
+          (move.moveData.moveType === 'high' && !ememy.isDucking) ||
+          move.moveData.moveType === 'mid'
+        ) {
+          ememy.isHit = true;
           ememy.health -= move.moveData.damage;
-          console.log(ememy.health);
 
           setTimeout(() => {
             ememy.isHit = false;

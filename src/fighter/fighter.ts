@@ -123,11 +123,28 @@ export default class Fighter {
 
   executeMoves() {
     if (this.isAttacking) return;
-    if (!this.keys.l.pressed && !this.keys.r.pressed && this.keys.a.pressed) {
+    if (
+      !this.keys.l.pressed &&
+      !this.keys.r.pressed &&
+      this.keys.a.pressed &&
+      !this.keys.d.pressed
+    ) {
       const move = this.fighterMoves.basic.find(
         move => move.MoveInstructions.join() === 'one'
       );
       if (!move) return;
+      this.fighterMoves.execute(move);
+    } else if (
+      !this.keys.l.pressed &&
+      !this.keys.r.pressed &&
+      this.keys.a.pressed &&
+      this.keys.d.pressed
+    ) {
+      const move = this.fighterMoves.basic.find(
+        move => move.MoveInstructions.join() === 'd,one'
+      );
+      if (!move) return;
+
       this.fighterMoves.execute(move);
     }
   }
