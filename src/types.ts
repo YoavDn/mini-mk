@@ -20,17 +20,50 @@ export type RectType = {
   d: TCoordinates;
 };
 
+// export interface IKeys {
+//   ArrowLeft: {
+//     pressed: boolean;
+//   };
+//   ArrowRight: {
+//     pressed: boolean;
+//   };
+//   ArrowDown: {
+//     pressed: boolean;
+//   };
+//   ArrowUp: {
+//     pressed: boolean;
+//   };
+//   b: {
+//     pressed: boolean;
+//   };
+//   a: {
+//     pressed: boolean;
+//   };
+//   d: {
+//     pressed: boolean;
+//   };
+//   s: {
+//     pressed: boolean;
+//   };
+//   w: {
+//     pressed: boolean;
+//   };
+//   r: {
+//     pressed: boolean;
+//   };
+// }
+
 export interface IKeys {
-  ArrowLeft: {
+  l: {
     pressed: boolean;
   };
-  ArrowRight: {
+  r: {
     pressed: boolean;
   };
-  ArrowDown: {
+  d: {
     pressed: boolean;
   };
-  ArrowUp: {
+  u: {
     pressed: boolean;
   };
   b: {
@@ -39,22 +72,11 @@ export interface IKeys {
   a: {
     pressed: boolean;
   };
-  d: {
-    pressed: boolean;
-  };
-  s: {
-    pressed: boolean;
-  };
-  w: {
-    pressed: boolean;
-  };
-  r: {
-    pressed: boolean;
-  };
 }
+
 type moveType = 'mid' | 'high' | 'low';
-type controls = 'd' | 'u' | 'l' | 'r' | '1' | '2';
-type MoveInstructions = controls[];
+type controls = 'd' | 'u' | 'l' | 'r' | 'one' | 'two';
+export type MoveInstructions = controls[];
 
 export interface FighterData {
   fighterName: string;
@@ -71,7 +93,6 @@ export type FighterMove = {
     moveType: moveType;
     damage: number;
     blockDamage: number;
-    moveHitbox: THitBox;
   };
   frameData: {
     startup: number;

@@ -1,22 +1,25 @@
 import Game from '../game/game';
-import type { TCoordinates, THitBox } from '../types';
+import charactersData from './charactersData';
+import type { TCoordinates, THitBox, MoveInstructions } from '../types';
+import FighterMoves from './fighterMoves';
 import { GROUND_LEVEL } from '../utils';
 import Obstacle from '../obstacle';
 import { IKeys } from '../types';
-
 export interface ICharacter {
   game: Game;
-  name: string;
+  name: 'yoyo' | 'kevin';
   playerNum: 1 | 0;
 }
 
 export default class Fighter {
   playerNum: 0 | 1;
   color?: string;
-  keys?: IKeys;
+  keys: IKeys;
   ctx: CanvasRenderingContext2D;
   obstacle: Obstacle;
-  name: string;
+  name: 'yoyo' | 'kevin';
+  game: Game;
+  fighterMoves: FighterMoves;
   pos: TCoordinates;
   lastKey?: string;
   hitbox: THitBox;
@@ -26,10 +29,12 @@ export default class Fighter {
     x: number;
     y: number;
   };
+  moveStack: MoveInstructions;
 
   constructor({ game, name, playerNum }: ICharacter) {
     this.pos = { x: 0, y: 0 };
     this.playerNum = playerNum;
+    this.game = game;
     this.ctx = game.ctx;
     this.name = name; // this will become an extemtion on custom char
     this.hitbox = { width: 60, height: 180 }; //same here is will become custom variables
@@ -42,6 +47,29 @@ export default class Fighter {
       width: this.hitbox.width,
       height: this.hitbox.height,
     });
+    this.moveStack = [];
+    this.fighterMoves = new FighterMoves(charactersData[this.name]);
+
+    this.keys = {
+      l: {
+        pressed: false,
+      },
+      r: {
+        pressed: false,
+      },
+      d: {
+        pressed: false,
+      },
+      u: {
+        pressed: false,
+      },
+      b: {
+        pressed: false,
+      },
+      a: {
+        pressed: false,
+      },
+    };
   }
 
   duck(isDownPressed: boolean) {
@@ -82,6 +110,10 @@ export default class Fighter {
     if (this.inAir()) return;
     this.isBlocking = isBlockBtnPressed ? true : false;
   }
+
+  //   executeMoves() {
+  //     if(!this.keys?.ArrowLeft.pressed && this.keys.arr)
+  //   }
 
   update() {
     //

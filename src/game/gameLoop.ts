@@ -26,6 +26,7 @@ export default class GameLoop {
   }
 
   private tick() {
+    this.game.frames++;
     this.ctx.clearRect(0, 0, this.w, this.h);
 
     //draw the background

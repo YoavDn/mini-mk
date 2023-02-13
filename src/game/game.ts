@@ -20,9 +20,11 @@ export default class Game {
   sence: Sence;
   isPause: boolean;
   players: Fighter[];
+  frames: number;
 
   constructor({ ctx }: IGame) {
     this.ctx = ctx;
+    this.frames = 0;
     this.ctx.canvas.width = this.w = 1000;
     this.ctx.canvas.height = this.h = 600;
     this.isPause = false;
@@ -42,8 +44,8 @@ export default class Game {
   }
 
   addPlayers() {
-    const player1 = new Fighter1(this);
-    const player2 = new Fighter2(this);
+    const player1 = new Fighter1(this, 'yoyo');
+    const player2 = new Fighter2(this, 'yoyo');
     this.players.push(player1, player2);
   }
 

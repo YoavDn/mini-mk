@@ -5,7 +5,7 @@ const controls: TControls = {
     right: 'ArrowRight',
     up: 'ArrowUp',
     down: 'ArrowDown',
-    attack: 'KeyP',
+    one: 'KeyN',
     block: 'KeyB',
   },
   player2: {
@@ -13,7 +13,7 @@ const controls: TControls = {
     right: 'KeyD',
     up: 'KeyW',
     down: 'KeyS',
-    attack: 'KeyT',
+    one: 'KeyT',
     block: 'KeyR',
   },
 };

@@ -3,45 +3,10 @@ import controls from '../controls';
 import Game from '../game/game';
 import { GRAVITY, GROUND_LEVEL } from '../utils';
 
-interface IKeys {
-  a: {
-    pressed: boolean;
-  };
-  d: {
-    pressed: boolean;
-  };
-  s: {
-    pressed: boolean;
-  };
-  w: {
-    pressed: boolean;
-  };
-  r: {
-    pressed: boolean;
-  };
-}
-
 export default class Fighter1 extends Fighter {
-  keys: IKeys; //for now
-  constructor(game: Game) {
-    super({ playerNum: 1, game, name: 'Yoav' });
-    this.keys = {
-      a: {
-        pressed: false,
-      },
-      d: {
-        pressed: false,
-      },
-      s: {
-        pressed: false,
-      },
-      w: {
-        pressed: false,
-      },
-      r: {
-        pressed: false,
-      },
-    };
+  constructor(game: Game, name: 'yoyo' | 'kevin') {
+    super({ playerNum: 1, game, name });
+
     this.color = 'blue';
     this.startPos();
     this.regeisterControls();
@@ -64,29 +29,29 @@ export default class Fighter1 extends Fighter {
           switch (action) {
             case 'left':
               if (this.inAir()) break;
-              this.keys.a.pressed = true;
+              this.keys.l.pressed = true;
               this.lastKey = player2[action];
 
               break;
             case 'right':
               if (this.inAir()) break;
-              this.keys.d.pressed = true;
+              this.keys.r.pressed = true;
               this.lastKey = player2[action];
 
               break;
             case 'down':
-              this.keys.s.pressed = true;
+              this.keys.d.pressed = true;
               this.lastKey = player2[action];
 
               break;
             case 'up':
               if (this.inAir()) break;
-              this.keys.w.pressed = true;
+              this.keys.u.pressed = true;
               this.velocity.y = -22;
               break;
             case 'block':
               if (this.inAir()) break;
-              this.keys.r.pressed = true;
+              this.keys.b.pressed = true;
               break;
           }
         }
@@ -96,19 +61,19 @@ export default class Fighter1 extends Fighter {
         if (e.code === player2[action]) {
           switch (action) {
             case 'left':
-              this.keys.a.pressed = false;
+              this.keys.l.pressed = false;
               break;
             case 'right':
-              this.keys.d.pressed = false;
+              this.keys.r.pressed = false;
               break;
             case 'down':
-              this.keys.s.pressed = false;
+              this.keys.d.pressed = false;
               break;
             case 'up':
-              this.keys.w.pressed = false;
+              this.keys.u.pressed = false;
               break;
             case 'block':
-              this.keys.r.pressed = false;
+              this.keys.b.pressed = false;
               break;
           }
         }
@@ -118,12 +83,12 @@ export default class Fighter1 extends Fighter {
 
   update(): void {
     if (!this.inAir()) this.velocity.x = 0;
-    this.block(this.keys.r.pressed);
+    this.block(this.keys.b.pressed);
 
-    this.moveLeft(this.keys.a.pressed, this.keys.s.pressed, 'KeyA');
-    this.moveRight(this.keys.d.pressed, this.keys.s.pressed, 'KeyD');
+    this.moveLeft(this.keys.l.pressed, this.keys.d.pressed, 'KeyA');
+    this.moveRight(this.keys.r.pressed, this.keys.d.pressed, 'KeyD');
 
-    if (!this.keys.w.pressed) this.duck(this.keys.s.pressed);
+    if (!this.keys.u.pressed) this.duck(this.keys.d.pressed);
 
     this.pos.x += this.velocity.x;
     this.pos.y += this.velocity.y;

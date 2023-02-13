@@ -2,48 +2,12 @@ import Fighter from './fighter';
 import Game from '../game/game';
 
 import controls from '../controls';
+
 import { GRAVITY, GROUND_LEVEL } from '../utils';
-interface IKeys {
-  ArrowLeft: {
-    pressed: boolean;
-  };
-  ArrowRight: {
-    pressed: boolean;
-  };
-  ArrowDown: {
-    pressed: boolean;
-  };
-  ArrowUp: {
-    pressed: boolean;
-  };
-  b: {
-    pressed: boolean;
-  };
-}
 
 export default class Fighter1 extends Fighter {
-  keys: IKeys;
-
-  constructor(game: Game) {
-    super({ playerNum: 0, game, name: 'Yoav' });
-    this.keys = {
-      ArrowLeft: {
-        pressed: false,
-      },
-      ArrowRight: {
-        pressed: false,
-      },
-      ArrowDown: {
-        pressed: false,
-      },
-      ArrowUp: {
-        pressed: false,
-      },
-      b: {
-        pressed: false,
-      },
-    };
-
+  constructor(game: Game, name: 'yoyo' | 'kevin') {
+    super({ playerNum: 0, game, name: name });
     this.startPos();
     this.color = 'red';
     this.regeisterControls();
@@ -67,30 +31,36 @@ export default class Fighter1 extends Fighter {
             case 'left':
               if (this.inAir()) break;
 
-              this.keys.ArrowLeft.pressed = true;
+              this.keys.l.pressed = true;
               this.lastKey = player1[action];
 
               break;
             case 'right':
               if (this.inAir()) break;
-              this.keys.ArrowRight.pressed = true;
+              this.keys.r.pressed = true;
               this.lastKey = player1[action];
 
               break;
 
             case 'down':
-              this.keys.ArrowDown.pressed = true;
+              this.keys.d.pressed = true;
               this.lastKey = player1[action];
               break;
 
             case 'up':
               if (this.inAir()) break;
-              this.keys.ArrowUp.pressed = true;
+              this.keys.u.pressed = true;
               this.velocity.y = -22;
               break;
             case 'block':
               if (this.inAir()) break;
               this.keys.b.pressed = true;
+              break;
+            case 'one':
+              if (this.inAir()) break;
+              this.keys.a.pressed = true;
+              this.moveStack.push('one');
+              break;
           }
         }
       });
@@ -99,19 +69,22 @@ export default class Fighter1 extends Fighter {
         if (e.code === player1[action]) {
           switch (action) {
             case 'left':
-              this.keys.ArrowLeft.pressed = false;
+              this.keys.l.pressed = false;
               break;
             case 'right':
-              this.keys.ArrowRight.pressed = false;
+              this.keys.r.pressed = false;
               break;
             case 'down':
-              this.keys.ArrowDown.pressed = false;
+              this.keys.d.pressed = false;
               break;
             case 'up':
-              this.keys.ArrowUp.pressed = false;
+              this.keys.u.pressed = false;
               break;
             case 'block':
               this.keys.b.pressed = false;
+              break;
+            case 'one':
+              this.keys.a.pressed = false;
               break;
           }
         }
@@ -123,18 +96,10 @@ export default class Fighter1 extends Fighter {
     if (!this.inAir()) this.velocity.x = 0;
     this.block(this.keys.b.pressed);
 
-    this.moveLeft(
-      this.keys.ArrowLeft.pressed,
-      this.keys.ArrowDown.pressed,
-      'ArrowLeft'
-    );
-    this.moveRight(
-      this.keys.ArrowRight.pressed,
-      this.keys.ArrowDown.pressed,
-      'ArrowRight'
-    );
+    this.moveLeft(this.keys.l.pressed, this.keys.d.pressed, 'ArrowLeft');
+    this.moveRight(this.keys.r.pressed, this.keys.d.pressed, 'ArrowRight');
 
-    if (!this.keys.ArrowUp.pressed) this.duck(this.keys.ArrowDown.pressed);
+    if (!this.keys.u.pressed) this.duck(this.keys.d.pressed);
 
     this.pos.x += this.velocity.x;
     this.pos.y += this.velocity.y;
