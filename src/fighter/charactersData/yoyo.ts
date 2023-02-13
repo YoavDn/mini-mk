@@ -10,6 +10,7 @@ const yoyo: FighterData = {
           moveType: 'high',
           blockDamage: 0.4,
           damage: 2,
+          reach: 100,
         },
         frameData: {
           active: 2,

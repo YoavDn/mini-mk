@@ -93,6 +93,7 @@ export type FighterMove = {
     moveType: moveType;
     damage: number;
     blockDamage: number;
+    reach: number;
   };
   frameData: {
     startup: number;

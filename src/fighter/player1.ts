@@ -91,21 +91,4 @@ export default class Fighter1 extends Fighter {
       });
     });
   }
-
-  //   update(): void {
-  //     // if (!this.inAir()) this.velocity.x = 0;
-  //     // this.block(this.keys.b.pressed);
-  //     // this.moveLeft(this.keys.l.pressed, this.keys.d.pressed, 'ArrowLeft');
-  //     // this.moveRight(this.keys.r.pressed, this.keys.d.pressed, 'ArrowRight');
-  //     // if (!this.keys.u.pressed) this.duck(this.keys.d.pressed);
-  //     // this.pos.x += this.velocity.x;
-  //     // this.pos.y += this.velocity.y;
-  //     // //detemining if player on ground
-  //     // if (
-  //     //   this.pos.y >=
-  //     //   this.ctx.canvas.height - GROUND_LEVEL - this.hitbox.height
-  //     // ) {
-  //     //   this.velocity.y = 0;
-  //     // } else this.velocity.y += GRAVITY;
-  //   }
 }

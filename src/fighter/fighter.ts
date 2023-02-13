@@ -26,6 +26,7 @@ export default class Fighter {
   hitbox: THitBox;
   health: number;
   isBlocking: boolean;
+  isAttacking: boolean;
   velocity: {
     x: number;
     y: number;
@@ -42,6 +43,7 @@ export default class Fighter {
     this.velocity = { x: 0, y: 0 };
     this.health = 100;
     this.isBlocking = false;
+    this.isAttacking = false;
     this.obstacle = new Obstacle({
       game,
       pos: this.pos,
@@ -49,7 +51,12 @@ export default class Fighter {
       height: this.hitbox.height,
     });
     this.moveStack = [];
-    this.fighterMoves = new FighterMoves(charactersData[this.name]);
+    this.fighterMoves = new FighterMoves(
+      this,
+      this.game,
+      charactersData[this.name]
+    );
+    console.log(this.fighterMoves);
 
     this.keys = {
       l: {
@@ -109,12 +116,18 @@ export default class Fighter {
   }
 
   executeMoves() {
+    if (this.isAttacking) return;
     if (!this.keys.l.pressed && !this.keys.r.pressed && this.keys.a.pressed) {
-      console.log('ohh');
+      const move = this.fighterMoves.basic.find(
+        move => move.MoveInstructions.join() === 'one'
+      );
+      if (!move) return;
+      this.fighterMoves.execute(move);
     }
   }
 
   update() {
+    this.executeMoves();
     if (!this.inAir()) this.velocity.x = 0;
     this.block(this.keys.b.pressed);
 
