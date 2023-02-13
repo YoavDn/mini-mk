@@ -11,6 +11,7 @@ const yoyo: FighterData = {
           blockDamage: 0.4,
           damage: 2,
           reach: 100,
+          blockPushOff: 5,
         },
         frameData: {
           active: 2,

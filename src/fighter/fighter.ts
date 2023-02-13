@@ -25,8 +25,10 @@ export default class Fighter {
   lastKey?: string;
   hitbox: THitBox;
   health: number;
+  isDucking: boolean;
   isBlocking: boolean;
   isAttacking: boolean;
+  canAttack: boolean;
   velocity: {
     x: number;
     y: number;
@@ -42,8 +44,10 @@ export default class Fighter {
     this.hitbox = { width: 60, height: 180 }; //same here is will become custom variables
     this.velocity = { x: 0, y: 0 };
     this.health = 100;
+    this.isDucking = false;
     this.isBlocking = false;
     this.isAttacking = false;
+    this.canAttack = false;
     this.obstacle = new Obstacle({
       game,
       pos: this.pos,
@@ -83,8 +87,10 @@ export default class Fighter {
   duck(isDownPressed: boolean) {
     if (this.velocity.y !== 0) return;
     if (isDownPressed) {
+      this.isDucking = true;
       this.hitbox.height = 90;
     } else {
+      this.isDucking = false;
       this.hitbox.height = 180;
     }
     this.pos.y = this.ctx.canvas.height - this.hitbox.height - GROUND_LEVEL;
@@ -97,21 +103,21 @@ export default class Fighter {
   }
 
   moveLeft(leftKeyPressed: boolean, downKeyPressed: boolean) {
-    if (this.isBlocking) return;
+    if (this.isBlocking || this.isAttacking) return;
     if (leftKeyPressed && !downKeyPressed) {
       this.velocity.x = -5;
     }
   }
 
   moveRight(rightKeyPressed: boolean, downKeyPressed: boolean) {
-    if (this.isBlocking) return;
+    if (this.isBlocking || this.isAttacking) return;
     if (rightKeyPressed && !downKeyPressed) {
       this.velocity.x = 5;
     }
   }
 
   block(isBlockBtnPressed: boolean) {
-    if (this.inAir()) return;
+    if (this.inAir() || this.isAttacking) return;
     this.isBlocking = isBlockBtnPressed ? true : false;
   }
 

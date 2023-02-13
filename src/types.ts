@@ -94,6 +94,7 @@ export type FighterMove = {
     damage: number;
     blockDamage: number;
     reach: number;
+    blockPushOff: number;
   };
   frameData: {
     startup: number;

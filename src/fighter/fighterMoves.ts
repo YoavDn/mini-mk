@@ -19,8 +19,7 @@ export default class FighterMoves {
 
     setTimeout(() => {
       this.run(move);
-      this.fighter.isAttacking = false;
-    }, 200);
+    }, 16 * move.frameData.startup);
   }
 
   run(move: FighterMove) {
@@ -28,17 +27,35 @@ export default class FighterMoves {
       f => f.playerNum !== this.fighter.playerNum
     );
     const ememy = this.game.players[ememyIdx];
-
     if (!ememy) return;
+
     //in range
     if (Math.abs(this.fighter.pos.x - ememy.pos.x) < move.moveData.reach) {
       if (ememy.isBlocking) {
-        ememy.health -= move.moveData.blockDamage;
-        console.log(ememy.health);
+        if (move.moveData.moveType === 'low' && !ememy.isDucking) {
+          ememy.health -= move.moveData.damage;
+        } else {
+          ememy.health -= move.moveData.blockDamage;
+
+          //block posh off
+          if (ememy.pos.x > this.fighter.pos.x)
+            ememy.pos.x += move.moveData.blockPushOff;
+          else ememy.pos.x -= move.moveData.blockPushOff;
+        }
+
+        setTimeout(() => {
+          ememy.canAttack = true;
+        }, Math.abs(16 * move.frameData.blockAdv));
       } else {
-        ememy.health -= move.moveData.damage;
+        if (move.moveData.moveType === 'high' && !ememy.isDucking)
+          ememy.health -= move.moveData.damage;
         console.log(ememy.health);
       }
     }
+
+    //player recover
+    setTimeout(() => {
+      this.fighter.isAttacking = false;
+    }, Math.abs(16 * move.frameData.recover));
   }
 }

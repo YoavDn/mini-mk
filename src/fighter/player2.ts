@@ -6,7 +6,7 @@ import { GRAVITY, GROUND_LEVEL } from '../utils';
 export default class Fighter1 extends Fighter {
   constructor(game: Game, name: 'yoyo' | 'kevin') {
     super({ playerNum: 1, game, name });
-
+    this.isBlocking = true;
     this.color = 'blue';
     this.startPos();
     this.regeisterControls();
@@ -53,6 +53,10 @@ export default class Fighter1 extends Fighter {
               if (this.inAir()) break;
               this.keys.b.pressed = true;
               break;
+            case 'one':
+              if (this.inAir()) break;
+              this.keys.a.pressed = true;
+              break;
           }
         }
       });
@@ -74,6 +78,9 @@ export default class Fighter1 extends Fighter {
               break;
             case 'block':
               this.keys.b.pressed = false;
+              break;
+            case 'one':
+              this.keys.a.pressed = false;
               break;
           }
         }
