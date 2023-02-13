@@ -28,7 +28,7 @@ export default class Fighter {
   isDucking: boolean;
   isBlocking: boolean;
   isAttacking: boolean;
-  canAttack: boolean;
+  isHit: boolean;
   velocity: {
     x: number;
     y: number;
@@ -47,7 +47,7 @@ export default class Fighter {
     this.isDucking = false;
     this.isBlocking = false;
     this.isAttacking = false;
-    this.canAttack = false;
+    this.isHit = false;
     this.obstacle = new Obstacle({
       game,
       pos: this.pos,
@@ -103,21 +103,21 @@ export default class Fighter {
   }
 
   moveLeft(leftKeyPressed: boolean, downKeyPressed: boolean) {
-    if (this.isBlocking || this.isAttacking) return;
+    if (this.isBlocking || this.isAttacking || this.isHit) return;
     if (leftKeyPressed && !downKeyPressed) {
       this.velocity.x = -5;
     }
   }
 
   moveRight(rightKeyPressed: boolean, downKeyPressed: boolean) {
-    if (this.isBlocking || this.isAttacking) return;
+    if (this.isBlocking || this.isAttacking || this.isHit) return;
     if (rightKeyPressed && !downKeyPressed) {
       this.velocity.x = 5;
     }
   }
 
   block(isBlockBtnPressed: boolean) {
-    if (this.inAir() || this.isAttacking) return;
+    if (this.inAir() || this.isAttacking || this.isHit) return;
     this.isBlocking = isBlockBtnPressed ? true : false;
   }
 

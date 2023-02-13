@@ -32,6 +32,7 @@ export default class FighterMoves {
     //in range
     if (Math.abs(this.fighter.pos.x - ememy.pos.x) < move.moveData.reach) {
       if (ememy.isBlocking) {
+        ememy.isHit = true;
         if (move.moveData.moveType === 'low' && !ememy.isDucking) {
           ememy.health -= move.moveData.damage;
         } else {
@@ -44,12 +45,17 @@ export default class FighterMoves {
         }
 
         setTimeout(() => {
-          ememy.canAttack = true;
+          ememy.isHit = false;
         }, Math.abs(16 * move.frameData.blockAdv));
       } else {
-        if (move.moveData.moveType === 'high' && !ememy.isDucking)
+        if (move.moveData.moveType === 'high' && !ememy.isDucking) {
           ememy.health -= move.moveData.damage;
-        console.log(ememy.health);
+          console.log(ememy.health);
+
+          setTimeout(() => {
+            ememy.isHit = false;
+          }, 16 * move.frameData.hitAdv);
+        }
       }
     }
 
