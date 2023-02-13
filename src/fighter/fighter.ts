@@ -1,4 +1,5 @@
 import Game from '../game/game';
+import { GRAVITY } from '../utils';
 import charactersData from './charactersData';
 import type { TCoordinates, THitBox, MoveInstructions } from '../types';
 import FighterMoves from './fighterMoves';
@@ -88,20 +89,16 @@ export default class Fighter {
     );
   }
 
-  moveLeft(leftKeyPressed: boolean, downKeyPressed: boolean, lastKey: string) {
+  moveLeft(leftKeyPressed: boolean, downKeyPressed: boolean) {
     if (this.isBlocking) return;
-    if (leftKeyPressed && this.lastKey === lastKey && !downKeyPressed) {
+    if (leftKeyPressed && !downKeyPressed) {
       this.velocity.x = -5;
     }
   }
 
-  moveRight(
-    rightKeyPressed: boolean,
-    downKeyPressed: boolean,
-    lastKey: string
-  ) {
+  moveRight(rightKeyPressed: boolean, downKeyPressed: boolean) {
     if (this.isBlocking) return;
-    if (rightKeyPressed && this.lastKey === lastKey && !downKeyPressed) {
+    if (rightKeyPressed && !downKeyPressed) {
       this.velocity.x = 5;
     }
   }
@@ -111,12 +108,31 @@ export default class Fighter {
     this.isBlocking = isBlockBtnPressed ? true : false;
   }
 
-  //   executeMoves() {
-  //     if(!this.keys?.ArrowLeft.pressed && this.keys.arr)
-  //   }
+  executeMoves() {
+    if (!this.keys.l.pressed && !this.keys.r.pressed && this.keys.a.pressed) {
+      console.log('ohh');
+    }
+  }
 
   update() {
-    //
+    if (!this.inAir()) this.velocity.x = 0;
+    this.block(this.keys.b.pressed);
+
+    this.moveLeft(this.keys.l.pressed, this.keys.d.pressed);
+    this.moveRight(this.keys.r.pressed, this.keys.d.pressed);
+
+    if (!this.keys.u.pressed) this.duck(this.keys.d.pressed);
+
+    this.pos.x += this.velocity.x;
+    this.pos.y += this.velocity.y;
+
+    //detemining if player on ground
+    if (
+      this.pos.y >=
+      this.ctx.canvas.height - GROUND_LEVEL - this.hitbox.height
+    ) {
+      this.velocity.y = 0;
+    } else this.velocity.y += GRAVITY;
   }
 
   draw() {
