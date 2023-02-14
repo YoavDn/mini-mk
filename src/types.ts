@@ -83,6 +83,18 @@ export type MoveInstructions = controls[];
 
 export interface FighterData {
   fighterName: string;
+  sprites: {
+    idle: {
+      left: {
+        img: HTMLImageElement;
+        frameCount: number;
+      };
+      right: {
+        img: HTMLImageElement;
+        frameCount: number;
+      };
+    };
+  };
   fighterMoves: {
     specials: FighterMove[];
     basic: FighterMove[];

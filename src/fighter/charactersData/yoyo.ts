@@ -1,6 +1,19 @@
 import { FighterData } from '../../types';
+import { yoyoImgs } from './charectersImgs';
 const yoyo: FighterData = {
   fighterName: 'yoyo',
+  sprites: {
+    idle: {
+      left: {
+        frameCount: 7,
+        img: yoyoImgs.idleL,
+      },
+      right: {
+        frameCount: 7,
+        img: yoyoImgs.idleR,
+      },
+    },
+  },
   fighterMoves: {
     basic: [
       {

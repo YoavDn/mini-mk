@@ -1,4 +1,5 @@
 import Game from '../game/game';
+import Sprite from './sprite';
 import { GRAVITY } from '../utils';
 import charactersData from './charactersData';
 import type { TCoordinates, THitBox, MoveInstructions } from '../types';
@@ -19,12 +20,14 @@ export default class Fighter {
   ctx: CanvasRenderingContext2D;
   obstacle: Obstacle;
   name: 'yoyo' | 'kevin';
+  sprite: Sprite;
   game: Game;
   fighterMoves: FighterMoves;
   pos: TCoordinates;
   lastKey?: string;
   hitbox: THitBox;
   health: number;
+  isOnLeft: boolean;
   isDucking: boolean;
   isBlocking: boolean;
   isAttacking: boolean;
@@ -44,6 +47,7 @@ export default class Fighter {
     this.hitbox = { width: 60, height: 180 }; //same here is will become custom variables
     this.velocity = { x: 0, y: 0 };
     this.health = 100;
+    this.isOnLeft = this.playerNum === 0 ? true : false;
     this.isDucking = false;
     this.isBlocking = false;
     this.isAttacking = false;
@@ -55,6 +59,7 @@ export default class Fighter {
       height: this.hitbox.height,
     });
     this.moveStack = [];
+    this.sprite = new Sprite(this, charactersData[this.name], this.game);
     this.fighterMoves = new FighterMoves(
       this,
       this.game,
@@ -162,6 +167,7 @@ export default class Fighter {
   }
 
   update() {
+    this.sprite.animate();
     this.executeMoves();
     if (!this.inAir()) this.velocity.x = 0;
     this.block(this.keys.b.pressed);
@@ -184,20 +190,20 @@ export default class Fighter {
   }
 
   draw() {
-    const { width: charW, height: charH } = this.hitbox;
+    // const { width: charW, height: charH } = this.hitbox;
 
-    const { x, y } = this.pos;
+    // const { x, y } = this.pos;
     this.obstacle.borderCollide();
     this.obstacle.fightersCollide();
 
-    this.ctx.lineWidth = 2;
-    this.ctx.save();
-    this.ctx.beginPath();
-    this.ctx.fillStyle = this.color ?? 'red';
-    this.ctx.strokeStyle = this.isBlocking ? 'white' : 'gray';
-    this.ctx.fillRect(x, y, charW, charH);
-    this.ctx.rect(x, y, charW, charH);
-    this.ctx.stroke();
+    // this.ctx.lineWidth = 2;
+    // this.ctx.save();
+    // this.ctx.beginPath();
+    // this.ctx.fillStyle = this.color ?? 'red';
+    // this.ctx.strokeStyle = this.isBlocking ? 'white' : 'gray';
+    // this.ctx.fillRect(x, y, charW, charH);
+    // this.ctx.rect(x, y, charW, charH);
+    // this.ctx.stroke();
     // for debug
     // this.ctx.moveTo(w / 2, 0);
     // this.ctx.lineTo(w / 2, h);

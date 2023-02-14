@@ -21,8 +21,20 @@ export default class Sence {
     this.background.src = imgSrc;
   }
 
+  updatePlayersSides() {
+    const [p1, p2] = this.game.players;
+    if (p1.pos.x > p2.pos.x) {
+      p1.isOnLeft = false;
+      p2.isOnLeft = true;
+    } else {
+      p1.isOnLeft = true;
+      p2.isOnLeft = false;
+    }
+  }
+
   draw() {
     const { ctx } = this.game;
+    this.updatePlayersSides();
 
     ctx.drawImage(
       this.background,
