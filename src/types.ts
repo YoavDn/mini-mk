@@ -81,17 +81,26 @@ type moveType = 'mid' | 'high' | 'low';
 type controls = 'd' | 'u' | 'l' | 'r' | 'one' | 'two';
 export type MoveInstructions = controls[];
 
+type spriteType = { frameCount: number; img: HTMLImageElement };
 export interface FighterData {
   fighterName: string;
   sprites: {
     idle: {
+      left: spriteType;
+      right: spriteType;
+    };
+    duck: {
+      left: spriteType;
+      right: spriteType;
+    };
+    block: {
       left: {
-        img: HTMLImageElement;
-        frameCount: number;
+        stand: spriteType;
+        low: spriteType;
       };
       right: {
-        img: HTMLImageElement;
-        frameCount: number;
+        stand: spriteType;
+        low: spriteType;
       };
     };
   };

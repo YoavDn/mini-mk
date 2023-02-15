@@ -13,6 +13,38 @@ const yoyo: FighterData = {
         img: yoyoImgs.idleR,
       },
     },
+    duck: {
+      left: {
+        frameCount: 1,
+        img: yoyoImgs.duckL,
+      },
+      right: {
+        frameCount: 1,
+        img: yoyoImgs.duckR,
+      },
+    },
+    block: {
+      left: {
+        stand: {
+          img: yoyoImgs.blockL,
+          frameCount: 1,
+        },
+        low: {
+          img: yoyoImgs.blockLLow,
+          frameCount: 1,
+        },
+      },
+      right: {
+        stand: {
+          img: yoyoImgs.blockR,
+          frameCount: 1,
+        },
+        low: {
+          img: yoyoImgs.blockRLow,
+          frameCount: 1,
+        },
+      },
+    },
   },
   fighterMoves: {
     basic: [

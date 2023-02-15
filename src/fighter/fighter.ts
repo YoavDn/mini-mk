@@ -102,6 +102,7 @@ export default class Fighter {
     }
     this.pos.y = this.ctx.canvas.height - this.hitbox.height - GROUND_LEVEL;
   }
+
   inAir(): boolean {
     return !(
       this.pos.y >=
@@ -190,20 +191,20 @@ export default class Fighter {
   }
 
   draw() {
-    // const { width: charW, height: charH } = this.hitbox;
+    const { width: charW, height: charH } = this.hitbox;
 
-    // const { x, y } = this.pos;
+    const { x, y } = this.pos;
     this.obstacle.borderCollide();
     this.obstacle.fightersCollide();
 
-    // this.ctx.lineWidth = 2;
-    // this.ctx.save();
-    // this.ctx.beginPath();
-    // this.ctx.fillStyle = this.color ?? 'red';
-    // this.ctx.strokeStyle = this.isBlocking ? 'white' : 'gray';
-    // this.ctx.fillRect(x, y, charW, charH);
-    // this.ctx.rect(x, y, charW, charH);
-    // this.ctx.stroke();
+    this.ctx.lineWidth = 2;
+    this.ctx.save();
+    this.ctx.beginPath();
+    this.ctx.fillStyle = this.color ?? 'red';
+    this.ctx.strokeStyle = this.isBlocking ? 'white' : 'gray';
+    this.ctx.fillRect(x, y, charW, charH);
+    this.ctx.rect(x, y, charW, charH);
+    this.ctx.stroke();
     // for debug
     // this.ctx.moveTo(w / 2, 0);
     // this.ctx.lineTo(w / 2, h);
