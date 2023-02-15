@@ -41,6 +41,7 @@ export default class Sprite {
       }
     } else {
       if (this.fighter.isBlocking) {
+        console.log('fuckkk');
         //just blocking
         this.currSprite = this.fighter.isOnLeft
           ? this.sprites.sprites.block.left.stand
@@ -52,6 +53,14 @@ export default class Sprite {
           : this.sprites.sprites.idle.right;
       }
     }
+
+    if (this.fighter.isAttacking) {
+      if (this.fighter.keys.a) {
+        this.currSprite = this.fighter.isOnLeft
+          ? this.sprites.sprites.fist.left.stand
+          : this.sprites.sprites.fist.right.stand;
+      }
+    }
   }
 
   animate() {
@@ -59,15 +68,18 @@ export default class Sprite {
     const { ctx } = this.game;
 
     if (this.currSprite.frameCount > 1) {
+      let diff = -120;
+
+      if (this.fighter.isAttacking) diff += -30;
       ctx.drawImage(
         this.currSprite.img,
         180 * this.frames.value,
         0,
-        this.currSprite.img.width / 7,
+        this.currSprite.img.width / this.currSprite.frameCount,
         this.currSprite.img.height,
         this.fighter.pos.x - 50,
-        this.fighter.pos.y - 120,
-        this.currSprite.img.width / 7,
+        this.fighter.pos.y + diff,
+        this.currSprite.img.width / this.currSprite.frameCount,
         this.currSprite.img.height
       );
 

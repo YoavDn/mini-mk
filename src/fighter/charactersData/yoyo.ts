@@ -45,6 +45,28 @@ const yoyo: FighterData = {
         },
       },
     },
+    fist: {
+      left: {
+        stand: {
+          img: yoyoImgs.fistL,
+          frameCount: 11,
+        },
+        low: {
+          img: yoyoImgs.fistL,
+          frameCount: 11,
+        },
+      },
+      right: {
+        stand: {
+          img: yoyoImgs.fistR,
+          frameCount: 11,
+        },
+        low: {
+          img: yoyoImgs.fistR,
+          frameCount: 11,
+        },
+      },
+    },
   },
   fighterMoves: {
     basic: [

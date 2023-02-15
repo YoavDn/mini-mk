@@ -103,6 +103,16 @@ export interface FighterData {
         low: spriteType;
       };
     };
+    fist: {
+      left: {
+        stand: spriteType;
+        low: spriteType;
+      };
+      right: {
+        stand: spriteType;
+        low: spriteType;
+      };
+    };
   };
   fighterMoves: {
     specials: FighterMove[];

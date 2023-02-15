@@ -6,6 +6,8 @@ import yoyoBlockLLow from '../../../assets/yoyo/blockL-low.png';
 import yoyoBlockRLow from '../../../assets/yoyo/blockR-low.png';
 import yoyoDuckR from '../../../assets/yoyo/duckR.png';
 import yoyoDuckL from '../../../assets/yoyo/duckL.png';
+import yoyoFistL from '../../../assets/yoyo/fistL.png';
+import yoyoFistR from '../../../assets/yoyo/fistR.png';
 
 export const yoyoImgs = {
   idleL: new Image(),
@@ -16,6 +18,8 @@ export const yoyoImgs = {
   blockLLow: new Image(),
   duckL: new Image(),
   duckR: new Image(),
+  fistR: new Image(),
+  fistL: new Image(),
 };
 
 //src for the imgase
@@ -27,3 +31,5 @@ yoyoImgs.blockR.src = yoyoBlockR;
 yoyoImgs.blockRLow.src = yoyoBlockRLow;
 yoyoImgs.duckL.src = yoyoDuckL;
 yoyoImgs.duckR.src = yoyoDuckR;
+yoyoImgs.fistL.src = yoyoFistL;
+yoyoImgs.fistR.src = yoyoFistR;
