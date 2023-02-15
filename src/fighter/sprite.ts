@@ -27,32 +27,29 @@ export default class Sprite {
   }
 
   updateSprite() {
-    //not moving
-    if (!this.fighter.keys.l.pressed && !this.fighter.keys.r.pressed) {
-      if (this.fighter.isDucking) {
-        if (this.fighter.isBlocking) {
-          //must be ducking and blocking
-          this.currSprite = this.fighter.isOnLeft
-            ? this.sprites.sprites.block.left.low
-            : this.sprites.sprites.block.right.low;
-        } else {
-          //just ducking
-          this.currSprite = this.fighter.isOnLeft
-            ? this.sprites.sprites.duck.left
-            : this.sprites.sprites.duck.right;
-        }
+    if (this.fighter.isDucking) {
+      if (this.fighter.isBlocking) {
+        //must be ducking and blocking
+        this.currSprite = this.fighter.isOnLeft
+          ? this.sprites.sprites.block.left.low
+          : this.sprites.sprites.block.right.low;
       } else {
-        if (this.fighter.isBlocking) {
-          //just blocking
-          this.currSprite = this.fighter.isOnLeft
-            ? this.sprites.sprites.block.left.stand
-            : this.sprites.sprites.block.right.stand;
-        } else {
-          //just standing
-          this.currSprite = this.fighter.isOnLeft
-            ? this.sprites.sprites.idle.left
-            : this.sprites.sprites.idle.right;
-        }
+        //just ducking
+        this.currSprite = this.fighter.isOnLeft
+          ? this.sprites.sprites.duck.left
+          : this.sprites.sprites.duck.right;
+      }
+    } else {
+      if (this.fighter.isBlocking) {
+        //just blocking
+        this.currSprite = this.fighter.isOnLeft
+          ? this.sprites.sprites.block.left.stand
+          : this.sprites.sprites.block.right.stand;
+      } else {
+        //just standing
+        this.currSprite = this.fighter.isOnLeft
+          ? this.sprites.sprites.idle.left
+          : this.sprites.sprites.idle.right;
       }
     }
   }
