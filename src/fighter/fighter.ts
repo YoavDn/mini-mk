@@ -168,7 +168,6 @@ export default class Fighter {
   }
 
   update() {
-    this.sprite.animate();
     this.executeMoves();
     if (!this.inAir()) this.velocity.x = 0;
     this.block(this.keys.b.pressed);
@@ -191,20 +190,22 @@ export default class Fighter {
   }
 
   draw() {
-    const { width: charW, height: charH } = this.hitbox;
+    // const { width: charW, height: charH } = this.hitbox;
 
-    const { x, y } = this.pos;
+    // const { x, y } = this.pos;
+    this.sprite.animate();
     this.obstacle.borderCollide();
     this.obstacle.fightersCollide();
 
     this.ctx.lineWidth = 2;
     this.ctx.save();
     this.ctx.beginPath();
-    this.ctx.fillStyle = this.color ?? 'red';
-    this.ctx.strokeStyle = this.isBlocking ? 'white' : 'gray';
-    this.ctx.fillRect(x, y, charW, charH);
-    this.ctx.rect(x, y, charW, charH);
-    this.ctx.stroke();
+
+    // this.ctx.fillStyle = this.color ?? 'red';
+    // this.ctx.strokeStyle = this.isBlocking ? 'white' : 'gray';
+    // this.ctx.fillRect(x, y, charW, charH);
+    // this.ctx.rect(x, y, charW, charH);
+    // this.ctx.stroke();
     // for debug
     // this.ctx.moveTo(w / 2, 0);
     // this.ctx.lineTo(w / 2, h);

@@ -24,6 +24,6 @@ yoyoImgs.idleL.src = yoyoIdleL;
 yoyoImgs.blockL.src = yoyoBlockL;
 yoyoImgs.blockLLow.src = yoyoBlockLLow;
 yoyoImgs.blockR.src = yoyoBlockR;
-yoyoImgs.blockR.src = yoyoBlockRLow;
+yoyoImgs.blockRLow.src = yoyoBlockRLow;
 yoyoImgs.duckL.src = yoyoDuckL;
 yoyoImgs.duckR.src = yoyoDuckR;
