@@ -45,8 +45,6 @@ export default class Fighter1 extends Fighter {
             case 'down':
               this.keys.d.pressed = true;
               this.lastKey = player1[action];
-              if (this.isOnLeft) this.sprite.change('duckL');
-              else this.sprite.change('duckR');
               break;
 
             case 'up':
