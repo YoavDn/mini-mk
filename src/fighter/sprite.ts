@@ -41,7 +41,6 @@ export default class Sprite {
       }
     } else {
       if (this.fighter.isBlocking) {
-        console.log('fuckkk');
         //just blocking
         this.currSprite = this.fighter.isOnLeft
           ? this.sprites.sprites.block.left.stand
