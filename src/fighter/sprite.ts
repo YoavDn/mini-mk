@@ -35,7 +35,6 @@ export default class Sprite {
           : this.sprites.sprites.block.right.low;
       } else if (this.fighter.isAttacking) {
         //low attack
-        console.log('low attack');
         this.currSprite = this.fighter.isOnLeft
           ? this.sprites.sprites.fist.left.low
           : this.sprites.sprites.fist.right.low;
