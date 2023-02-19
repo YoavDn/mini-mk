@@ -33,6 +33,12 @@ export default class Sprite {
         this.currSprite = this.fighter.isOnLeft
           ? this.sprites.sprites.block.left.low
           : this.sprites.sprites.block.right.low;
+      } else if (this.fighter.isAttacking) {
+        //low attack
+        console.log('low attack');
+        this.currSprite = this.fighter.isOnLeft
+          ? this.sprites.sprites.fist.left.low
+          : this.sprites.sprites.fist.right.low;
       } else {
         //just ducking
         this.currSprite = this.fighter.isOnLeft
@@ -45,19 +51,15 @@ export default class Sprite {
         this.currSprite = this.fighter.isOnLeft
           ? this.sprites.sprites.block.left.stand
           : this.sprites.sprites.block.right.stand;
+      } else if (this.fighter.isAttacking) {
+        this.currSprite = this.fighter.isOnLeft
+          ? this.sprites.sprites.fist.left.stand
+          : this.sprites.sprites.fist.right.stand;
       } else {
         //just standing
         this.currSprite = this.fighter.isOnLeft
           ? this.sprites.sprites.idle.left
           : this.sprites.sprites.idle.right;
-      }
-    }
-
-    if (this.fighter.isAttacking) {
-      if (this.fighter.keys.a) {
-        this.currSprite = this.fighter.isOnLeft
-          ? this.sprites.sprites.fist.left.stand
-          : this.sprites.sprites.fist.right.stand;
       }
     }
   }
@@ -70,6 +72,7 @@ export default class Sprite {
       let diff = -120;
 
       if (this.fighter.isAttacking) diff += -30;
+      if (this.fighter.isDucking) diff += -30;
       ctx.drawImage(
         this.currSprite.img,
         180 * this.frames.value,

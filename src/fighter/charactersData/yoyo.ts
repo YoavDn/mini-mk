@@ -52,8 +52,8 @@ const yoyo: FighterData = {
           frameCount: 11,
         },
         low: {
-          img: yoyoImgs.fistL,
-          frameCount: 11,
+          img: yoyoImgs.lowFistL,
+          frameCount: 8,
         },
       },
       right: {
@@ -62,8 +62,8 @@ const yoyo: FighterData = {
           frameCount: 11,
         },
         low: {
-          img: yoyoImgs.fistR,
-          frameCount: 11,
+          img: yoyoImgs.lowFistR,
+          frameCount: 8,
         },
       },
     },
