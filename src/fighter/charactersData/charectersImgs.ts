@@ -8,6 +8,8 @@ import yoyoDuckR from '../../../assets/yoyo/duckR.png';
 import yoyoDuckL from '../../../assets/yoyo/duckL.png';
 import yoyoFistL from '../../../assets/yoyo/fistL.png';
 import yoyoFistR from '../../../assets/yoyo/fistR.png';
+import yoyoLowFistL from '../../../assets/yoyo/lowFistL.png';
+import yoyoLowFistR from '../../../assets/yoyo/lowFistR.png';
 
 export const yoyoImgs = {
   idleL: new Image(),
@@ -20,6 +22,8 @@ export const yoyoImgs = {
   duckR: new Image(),
   fistR: new Image(),
   fistL: new Image(),
+  lowFistL: new Image(),
+  lowFistR: new Image(),
 };
 
 //src for the imgase
@@ -33,3 +37,5 @@ yoyoImgs.duckL.src = yoyoDuckL;
 yoyoImgs.duckR.src = yoyoDuckR;
 yoyoImgs.fistL.src = yoyoFistL;
 yoyoImgs.fistR.src = yoyoFistR;
+yoyoImgs.lowFistL.src = yoyoLowFistL;
+yoyoImgs.lowFistR.src = yoyoLowFistR;
